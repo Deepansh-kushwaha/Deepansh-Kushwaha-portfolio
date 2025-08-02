@@ -1,69 +1,53 @@
-# React + TypeScript + Vite
+# Awesome Project
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A concise summary of how to run project .
 
-Currently, two official plugins are available:
+## Table of Contents
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- [Installation](#installation) - Steps to set up and install the project on your local machine.
+- [Usage](#usage)
+- [Features](#features) 
+- [Conrtibution](#contributing)
+- [License](#license)
 
-## Expanding the ESLint configuration
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## Installation
 
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+To install this project, follow these steps:
 
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/Deepansh-kushwaha/React-portfolio
+   ```
+2. Navigate to the project directory:
+   ```bash
+   cd awesome-project
+   ```
+3. Install the dependencies:
+   ```bash
+   npm install
+   ```
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+## Usage 
+- Step-by-step instructions on how to use the project:
+    - Open your terminal and navigate to the project directory.
+    - Start the development server using `npm run dev` or the appropriate command.
+    - Open your browser and go to the provided local URL (e.g., http://localhost:5173).
+    - Follow the on-screen instructions to interact with the project.
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## Features 
+    - Soon to be added.
+## Contributing
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+To contribute to this project, follow these steps:
 
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+- Fork the repository.
+- Create a new branch for your feature or bugfix.
+- Make your changes and commit them.
+- Push your branch to your forked repository.
+- Open a pull request describing your changes.
+
+## License
+  - This is my personal project.
+  - The project is open for contribution.
+  - This project is licensed under the MIT License.  
