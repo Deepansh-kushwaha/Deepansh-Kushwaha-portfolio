@@ -1,11 +1,11 @@
 
 
-function about() {
+function About() {
   return (
     <div>
-      
+      This is about page 
     </div>
   )
 }
 
-export default about
+export default About
