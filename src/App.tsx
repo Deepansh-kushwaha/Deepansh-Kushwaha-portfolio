@@ -17,7 +17,7 @@ function App() {
       <Route path="/contact" element={<Contact />} />
       <Route path="/projects" element={<Projects />} />
       <Route path="/login" element={<Home />} />
-      <Route path="*" element={<Forbidden />} />
+      <Route path={import.meta.env.BASE_URL+"/*"} element={<Forbidden />} />
     
 
     </Routes>
