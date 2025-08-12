@@ -26,6 +26,7 @@
     "react-dom": "^19.1.0",
     "react-hook-form": "^7.61.1",
     "react-router": "^7.7.1",
+    "remixicon": "^4.6.0",
     "three": "^0.179.1"
   },
   "devDependencies": {

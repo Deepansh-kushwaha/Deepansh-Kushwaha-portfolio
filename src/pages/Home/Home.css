@@ -1,0 +1,27 @@
+.social-container{
+    height: 7rem;
+    width: 7rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 100%;
+   
+}
+
+.logos{
+    font-size: 2.5em;
+}
+
+.linkbutton{
+   height: 4rem;
+   width: 8rem;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   border-radius: 100px;
+}   
+
+@layer utilities {
+  .text-outline-2 { -webkit-text-stroke: 2px white; }
+  .text-outline-4 { -webkit-text-stroke: 4px white; }
+}
