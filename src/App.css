@@ -2,9 +2,6 @@
 @import 'remixicon/fonts/remixicon.css';
 :root {
 font-family: poppins, system-ui, Avenir, Helvetica, Arial, sans-serif;
-margin: 0;
-padding: 0;
-box-sizing: border-box;
 background-color: #0c0c0c;
 
 }

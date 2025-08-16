@@ -1,7 +1,10 @@
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, EffectCoverflow, Pagination } from "swiper/modules";
-
+import cuberto from '../../assets/cuberto.png'
+import cyber from '../../assets/cyberpunk.png'
+import tracker from '../../assets/tracker.png'
 import './Swiperslide.css'
+import { Link } from "react-router";
 
 
 
@@ -35,31 +38,29 @@ function Swiperslide() {
         className="mySwiper"
       >
         <SwiperSlide >
-          <img src="https://swiperjs.com/demos/images/nature-1.jpg" />
+         <Link to="/projects">
+          <img src={cuberto} />
+         </Link>
         </SwiperSlide>
         <SwiperSlide>
-          <img src="https://swiperjs.com/demos/images/nature-2.jpg" />
+          <Link to={"/projects"}>
+          <img src={cyber} />
+          </Link>
+        </SwiperSlide>
+        <SwiperSlide >
+         <Link to="/projects">
+          <img src={cuberto} />
+         </Link>
         </SwiperSlide>
         <SwiperSlide>
-          <img src="https://swiperjs.com/demos/images/nature-3.jpg" />
+          <Link to="/projects">
+          <img src={tracker} />
+          </Link>
         </SwiperSlide>
         <SwiperSlide>
-          <img src="https://swiperjs.com/demos/images/nature-4.jpg" />
-        </SwiperSlide>
-        <SwiperSlide>
-          <img src="https://swiperjs.com/demos/images/nature-5.jpg" />
-        </SwiperSlide>
-        <SwiperSlide>
-          <img src="https://swiperjs.com/demos/images/nature-6.jpg" />
-        </SwiperSlide>
-        <SwiperSlide>
-          <img src="https://swiperjs.com/demos/images/nature-7.jpg" />
-        </SwiperSlide>
-        <SwiperSlide>
-          <img src="https://swiperjs.com/demos/images/nature-8.jpg" />
-        </SwiperSlide>
-        <SwiperSlide>
-          <img src="https://swiperjs.com/demos/images/nature-9.jpg" />
+          <Link to="/projects">
+          <img src={cyber} />
+          </Link>
         </SwiperSlide>
       </Swiper>
     </>

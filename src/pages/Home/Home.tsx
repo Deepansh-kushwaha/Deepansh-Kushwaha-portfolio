@@ -1,8 +1,8 @@
 // import Scrollable from "../components/Scrollable"
 import Loader  from "../../components/Loader";
+import "./Home.css";
 import Footer from "../../components/Footer";
 import LiquidButton from "../../components/LiquidButton";
-import "./Home.css";
 import Swiperslide from "../../components/swiperslide/Swiperslide";
 import SkillsSection from "../../components/SkillsSection";
 import Magnetic from "../../components/Magnetic";
@@ -20,12 +20,13 @@ function Home() {
           id="Hero"
         >
           <div className="relative flex flex-col items-center text-white z-10 ">
-            <div className="relative z-2 mb-5 ">
-              <Magnetic strength={0.3}>
-              <h1 className="text-9xl mr-[25rem] md:text-8xl font-extrabold leading-18 tracking-tighter    text-outline-2 hover:text-transparent text-white   transition-colors duration-300 ease-in cursor-pointer">
+            <div className="relative z-2 p-11">
+              <Magnetic strength={0.1}>
+              <h1 className="text-9xl mr-[25rem] md:text-8xl font-extrabold leading-18 tracking-tighter bg-[url('https://ik.imagekit.io/sheryians/Aptitude%20&%20Reasoning/bloomMask%20Large_lvwFbM14_l.png')] bg-center text-clip pb-1  cursor-pointer">
                 
                 DEEPANSH
               </h1>
+              
               </Magnetic>
               <p className="text-base sm:text-lg font-light mr-75 text-center">
                 Simmmmmply
@@ -36,8 +37,8 @@ function Home() {
               <p className="text-base text-center ml-75  sm:text-lg font-light">
                 Awwwwwsome
               </p>
-              <Magnetic strength={0.3}>
-              <h1 className="text-9xl ml-[25rem]  md:text-8xl font-extrabold leading-14 tracking-tighter   text-outline-2 hover:text-transparent text-white cursor-pointer ">
+              <Magnetic strength={0.1}>
+              <h1 className="text-9xl ml-[25rem]  md:text-8xl font-extrabold leading-14 tracking-tighter bg-[url('https://ik.imagekit.io/sheryians/Aptitude%20&%20Reasoning/bloomMask%20Large_lvwFbM14_l.png')] text-clip pb-4 cursor-pointer ">
                 KUSHWAHA
               </h1>
               </Magnetic>
