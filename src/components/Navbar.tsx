@@ -9,7 +9,7 @@ function Navbar() {
         <Link to="/"><li className={hoverborder}>Home</li></Link>
         <Link to="/projects"><li className={hoverborder}>Projects</li></Link>
         <Link to="/about"><li className={hoverborder}>About</li></Link>
-        <Link to="/contact"><li className={hoverborder}>Certifications</li></Link>
+        <Link to="/certification"><li className={hoverborder}>Certifications</li></Link>
       </ul>
 
     </nav>

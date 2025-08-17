@@ -3,6 +3,7 @@ import { Autoplay, EffectCoverflow, Pagination } from "swiper/modules";
 import cuberto from '../../assets/cuberto.png'
 import cyber from '../../assets/cyberpunk.png'
 import tracker from '../../assets/tracker.png'
+import pass from '../../assets/pass.png'
 import './Swiperslide.css'
 import { Link } from "react-router";
 
@@ -49,7 +50,7 @@ function Swiperslide() {
         </SwiperSlide>
         <SwiperSlide >
          <Link to="/projects">
-          <img src={cuberto} />
+          <img src={pass} />
          </Link>
         </SwiperSlide>
         <SwiperSlide>

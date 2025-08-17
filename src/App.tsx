@@ -6,6 +6,7 @@ import About from "./pages/About";
 import Contact from "./pages/Contact";
 import Projects from "./pages/Projects/Projects";
 import Forbidden from "./pages/Forbidden";
+import Certification from "./pages/Certification";
 function App() {
   const location = useLocation();
   const showNavbar = ["/login", "/register", "/projects"].includes(location.pathname);
@@ -17,6 +18,7 @@ function App() {
       <Route path="/contact" element={<Contact />} />
       <Route path="/projects" element={<Projects />} />
       <Route path="/login" element={<Home />} />
+      <Route path="/certification" element={<Certification />} />
       <Route path={import.meta.env.BASE_URL+"/*"} element={<Forbidden />} />
     
 
