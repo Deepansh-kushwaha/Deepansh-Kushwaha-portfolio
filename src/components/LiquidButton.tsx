@@ -49,7 +49,7 @@ export default function CircleFillButton(props: Props) {
 
 
   return (
-    <Link to={props.link}>
+    <Link to={props.link} target="_blank">
     <button
      ref={buttonRef}
       onMouseEnter={handleEnter}

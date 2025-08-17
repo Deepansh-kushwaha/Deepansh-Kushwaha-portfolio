@@ -20,4 +20,7 @@
   aspect-ratio: 1/1;
   object-fit: cover;
 }
-
+.swiper-slide img:hover {
+  transform: scale(1.02);
+  transition: transform 0.3s ease-in-out;
+}

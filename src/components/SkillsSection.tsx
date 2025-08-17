@@ -70,7 +70,7 @@ function MagneticCircle({ size, img, top, left }: CircleProps) {
 
 export default function SkillsSection() {
   return (
-    <section className="relative w-full h-screen bg-black flex items-center justify-center overflow-hidden pt-36">
+    <section className="relative w-full h-screen flex items-center justify-center overflow-hidden pt-36">
       {/* Center title */}
       <h2 className="absolute text-white text-5xl font-bold z-20 tracking-wider font-poppins">Skills</h2>
 

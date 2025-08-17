@@ -14,7 +14,9 @@ function Home() {
   return (
     <>
     <Loader />
-      <section className="hero dot-grid-svg  h-screen flex ">
+    <main className="bg-gradient-to-b from-gray-950 via-black to-gray-950 "> 
+
+      <section className="hero dot-grid-svg  h-screen flex  ">
         <div
           className="flex items-center justify-center min-h-98 relative overflow-hidden w-full "
           id="Hero"
@@ -57,18 +59,12 @@ function Home() {
       </section>
       {/* <Scrollable /> */}
 
-      <section className="p-10 flex flex-col justify-center min-h-screen">
+      <section className="p-10 flex flex-col justify-center min-h-screen ">
         <h1 className="mt-20 text-7xl text-white text-center font-poppins font-extrabold">
           Projects{" "}
         </h1>
         <Swiperslide/>
-        {/* <div className="slider-container m-10">
-          <div className="slider flex justify-around">
-            <div className="card h-40 w-60 bg-amber-50"></div>
-            <div className="card h-40 w-100 bg-amber-50"></div>
-            <div className="card h-40 w-60 bg-amber-50"></div>
-          </div>
-        </div> */}
+       
         <div className="flex items-center justify-center">
 
           <Magnetic strength={1}>
@@ -106,7 +102,7 @@ function Home() {
             textclass="ri-github-line logos"
             color={"#92FF8D"}
             layout="social-container"
-            link="https://github.com/deepanshkushwaha"
+            link="https://github.com/Deepansh-kushwaha"
             />
             </Magnetic>
             <Magnetic strength={1}>
@@ -132,6 +128,7 @@ function Home() {
         </div>
         <Footer />
       </section>
+            </main>
     </>
   );
 }

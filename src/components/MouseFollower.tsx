@@ -72,7 +72,7 @@ const MouseFollower: React.FC<MouseFollowerProps> = ({
           ? { backdropFilter: `blur(${blurIntensity}px)` }
           : {}),
       }}
-      className={`fixed top-0 left-0 pointer-events-none rounded-full overflow-hidden z-[-1]`}
+      className={`fixed top-0 left-0 pointer-events-none rounded-full overflow-hidden z-0`}
     >
       <img
         src={imgSrc}
