@@ -1,8 +1,29 @@
 @import "tailwindcss";
 @import 'remixicon/fonts/remixicon.css';
+@font-face {
+  font-family: font1;
+  src: url(/Fonts/Lausanne-300.woff2);
+}
+@font-face {
+  font-family: font2;
+  src: url(/Fonts/Lausanne-500.woff2);
+}
+@font-face {
+  font-family: font3;
+  src: url(/Fonts/Gilroy-Extrabold_YC6oQDa3Ix.ttf);
+}
+@font-face {
+  font-family: font4;
+  src: url(/Fonts/Gilroy-Light.woff2);
+}
+@font-face {
+  font-family: font5;
+  src: url(/Fonts/Gilroy-Medium_eHDK2RllDd.ttf);
+}
 :root {
 font-family: poppins, system-ui, Avenir, Helvetica, Arial, sans-serif;
 background-color: #0c0c0c;
+scroll-behavior: smooth;
 
 }
   .dot-grid-svg {

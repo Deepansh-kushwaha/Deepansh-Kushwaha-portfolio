@@ -1,5 +1,5 @@
 // import Scrollable from "../components/Scrollable"
-import Loader  from "../../components/Loader";
+
 import "./Home.css";
 import Footer from "../../components/Footer";
 import LiquidButton from "../../components/LiquidButton";
@@ -13,8 +13,9 @@ function Home() {
 
   return (
     <>
-    <Loader />
+   
     <main className="bg-gradient-to-b from-gray-950 via-black to-gray-950 "> 
+ 
 
       <section className="hero dot-grid-svg  h-screen flex  ">
         <div
