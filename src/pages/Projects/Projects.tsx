@@ -7,7 +7,6 @@ import Card from "../../components/Card"
 import { useGSAP } from "@gsap/react"
 import gsap from "gsap"
 import { ScrollTrigger } from "gsap/ScrollTrigger"
-
 function Projects() {
 
   const project = [
@@ -22,10 +21,10 @@ function Projects() {
     {
     image1:"src/assets/cyberpunk.png",
     image2:"src/assets/cuberto.png",
-  }
+  },
 ]
 
-gsap.registerPlugin(ScrollTrigger);
+gsap.registerPlugin(ScrollTrigger );
 
 useGSAP(() => {
   gsap.from(".hero",{
@@ -42,9 +41,11 @@ useGSAP(() => {
       scrub: true
     }
   })
-  
 })
+
   return (<>
+  <div className="wrapper">
+
     <Canvas  className="w-full h-screen" flat  camera={{fov:30}}>
       <OrbitControls enableDamping enableZoom={false} />
       <ambientLight/>
@@ -52,15 +53,15 @@ useGSAP(() => {
       <Scene />  
       <EffectComposer >
       <Bloom
-    mipmapBlur // Enables or disables mipmap blur.
-    intensity={1.0} // The bloom intensity.  
-    luminanceThreshold={0.8} // luminance threshold. Raise this value to mask out darker elements in the scene.
-    luminanceSmoothing={0.0205} // smoothness of the luminance threshold. Range is [0, 1]
-        />
-    <ToneMapping adaptive />
-    </EffectComposer>
-    
-    </Canvas>
+      mipmapBlur // Enables or disables mipmap blur.
+      intensity={1.0} // The bloom intensity.  
+      luminanceThreshold={0.8} // luminance threshold. Raise this value to mask out darker elements in the scene.
+      luminanceSmoothing={0.0205} // smoothness of the luminance threshold. Range is [0, 1]
+      />
+      <ToneMapping adaptive />
+      </EffectComposer>
+      
+      </Canvas>
     <div>
       <div>
       <h1 className="text-[20vh] font-[font3] text-white font-bold">Projects 2.0</h1>
@@ -74,7 +75,7 @@ useGSAP(() => {
         ))}
 
       </div>
-  
+      </div>
     </>
   )
 }

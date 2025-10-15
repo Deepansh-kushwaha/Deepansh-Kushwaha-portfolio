@@ -9,7 +9,7 @@ import Forbidden from "./pages/Forbidden";
 import Certification from "./pages/Certification";
 function App() {
   const location = useLocation();
-  const showNavbar = ["/login", "/register", "/projects"].includes(location.pathname);
+  const showNavbar = ["/login", "/register"].includes(location.pathname);
   return (<>
     {showNavbar || < Navbar/>}
     <Routes>
