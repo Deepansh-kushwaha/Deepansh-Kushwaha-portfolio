@@ -207,21 +207,19 @@ export default function CertificationHallPage() {
   return (
     <div
       ref={containerRef}
-      className="min-h-screen bg-black text-slate-100 p-10"
+      className="min-h-screen bg-[var(--surface)] text-[var(--on-surface)] p-6 md:p-10 pt-32"
     >
-      <header className="relative overflow-hidden">
-        <div className="absolute inset-0 -z-10">
-          <div className="absolute -left-24 top-24 h-64 w-64 rounded-full bg-cyan-500/10 blur-3xl" />
-          <div className="absolute -right-24 top-48 h-72 w-72 rounded-full bg-indigo-500/10 blur-3xl" />
+      <header className="relative overflow-hidden mb-20">
+        <div className="absolute inset-0 -z-10 opacity-30">
+          <div className="absolute -left-24 top-0 h-64 w-64 rounded-full bg-[var(--primary)] blur-[100px]" />
         </div>
-        <div className="mx-auto max-w-6xl px-6 pt-16 pb-8">
-          <h1 className="ch-title text-3xl font-semibold md:text-4xl font-poppins">
-            Certification Hall
-          </h1>
-          <p className="ch-sub mt-3 max-w-2xl text-slate-300">
+        <div className="mx-auto max-w-6xl px-6">
+          <p className="label-md text-[var(--primary)] mb-4">Credentials</p>
+          <h1 className="ch-title display-lg">Certification <br/><span className="text-[var(--primary)]">Hall</span></h1>
+          <p className="ch-sub mt-8 max-w-2xl body-lg opacity-60">
             A curated wall of credentials—click any tile to preview, verify, or download.
           </p>
-          <div className="ch-filters mt-6 flex flex-wrap gap-2">
+          <div className="ch-filters mt-12 flex flex-wrap gap-4">
             {filters.map((f) => {
               const isActive = active === f;
               return (
@@ -229,10 +227,10 @@ export default function CertificationHallPage() {
                   key={f}
                   onClick={() => setActive(f as "All" | CertCategory)}
                   className={[
-                    "rounded-full border px-4 py-1.5 text-sm backdrop-blur transition-colors",
+                    "rounded-full px-6 py-2 text-sm label-md transition-all duration-300",
                     isActive
-                      ? "border-cyan-400/60 bg-cyan-400/10 text-cyan-200"
-                      : "border-slate-700/60 bg-slate-800/40 text-slate-300 hover:text-white",
+                      ? "bg-[var(--primary)] text-white shadow-lg shadow-[var(--primary)]/20"
+                      : "bg-[var(--surface-container)] text-[var(--on-surface)] opacity-60 hover:opacity-100",
                   ].join(" ")}
                 >
                   {f}
@@ -248,50 +246,48 @@ export default function CertificationHallPage() {
           ref={gridRef}
           onPointerMove={handlePointerMove}
           onPointerLeave={handlePointerLeave}
-          className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3"
+          className="grid grid-cols-1 gap-12 sm:grid-cols-2 lg:grid-cols-3"
         >
           {filtered.map((c) => (
             <article
               key={c.id}
-              className="ch-card group tilt relative rounded-2xl border border-slate-700/60 bg-slate-900/60 p-3 shadow-xl shadow-black/20 backdrop-blur will-change-transform"
+              className="ch-card group tilt relative rounded-[2.5rem] bg-[var(--surface-container-low)] p-4 soft-shadow transition-all duration-500 hover:scale-[1.02]"
             >
-              <div className="shine pointer-events-none absolute inset-0 rounded-2xl" />
+              <div className="shine pointer-events-none absolute inset-0 rounded-[2.5rem]" />
               <div
-                className="relative overflow-hidden rounded-xl bg-slate-800/40"
+                className="relative overflow-hidden rounded-[2rem] bg-[var(--surface-container)] aspect-[4/3] cursor-pointer"
                 role="button"
                 aria-label={`Open ${c.title}`}
                 tabIndex={0}
                 onClick={() => setModal(c)}
-                onKeyDown={(e) => e.key === "Enter" && setModal(c)}
               >
                 <img
                   src={c.thumbnailUrl}
                   alt={`${c.title} preview`}
-                  className="h-48 w-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+                  className="h-full w-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700 group-hover:scale-105"
                   loading="lazy"
                 />
-                <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/30 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+                <div className="absolute inset-0 bg-[var(--primary)]/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
               </div>
 
-              <div className="mt-3 space-y-1.5">
-                <div className="flex items-center justify-between">
-                  <h3 className="text-base font-medium text-slate-100">
+              <div className="mt-6 px-4 pb-4 space-y-4">
+                <div className="flex flex-col gap-1">
+                   <p className="label-md text-[var(--primary)] text-xs opacity-60 uppercase">{c.category}</p>
+                  <h3 className="headline-lg text-lg tracking-normal uppercase-none">
                     {c.title}
                   </h3>
-                  <span className="rounded-full border border-slate-700/60 bg-slate-800/60 px-2 py-0.5 text-xs text-slate-300">
-                    {c.category}
-                  </span>
                 </div>
-                <p className="text-sm text-slate-400">
-                  {c.issuer} • {c.issueDate}
+                
+                <p className="body-md opacity-60 font-medium">
+                  {c.issuer} — {c.issueDate}
                 </p>
 
                 {c.skills?.length ? (
-                  <div className="flex flex-wrap gap-1.5 pt-1">
+                  <div className="flex flex-wrap gap-2 pt-2">
                     {c.skills.map((s) => (
                       <span
                         key={s}
-                        className="rounded-md border border-slate-700/60 bg-slate-800/40 px-2 py-0.5 text-xs text-slate-300"
+                        className="rounded-full bg-[var(--surface-container)] px-3 py-1 text-[10px] label-md opacity-50"
                       >
                         {s}
                       </span>
@@ -299,16 +295,15 @@ export default function CertificationHallPage() {
                   </div>
                 ) : null}
 
-                <div className="flex items-center gap-2 pt-2">
+                <div className="flex items-center gap-4 pt-4">
                   {c.verifyUrl && (
                     <a
                       href={c.verifyUrl}
                       target="_blank"
                       rel="noreferrer"
-                      className="inline-flex items-center gap-1 rounded-md border border-slate-700/60 bg-slate-800/40 px-3 py-1.5 text-xs text-slate-200 hover:text-white"
+                      className="label-md text-xs hover:text-[var(--primary)] transition-colors flex items-center gap-2"
                     >
-                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg>
-                      Verify
+                      <i className="ri-external-link-line"></i> Verify
                     </a>
                   )}
                   {c.downloadUrl && (
@@ -316,10 +311,9 @@ export default function CertificationHallPage() {
                       href={c.downloadUrl}
                       target="_blank"
                       rel="noreferrer"
-                      className="inline-flex items-center gap-1 rounded-md bg-gradient-to-r from-cyan-500 to-indigo-500 px-3 py-1.5 text-xs font-medium text-white"
+                      className="ml-auto btn-primary py-2 px-5 text-xs rounded-full"
                     >
-                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M12 3v12"/><path d="m7 10 5 5 5-5"/><path d="M5 21h14"/></svg>
-                      Download
+                      Download <i className="ri-download-2-line"></i>
                     </a>
                   )}
                 </div>

@@ -3,8 +3,8 @@ import { motion, useMotionValue, useSpring } from "framer-motion";
 
 interface CircleProps {
   size: number;
-  top: string;
-  left: string;
+  top?: string;
+  left?: string;
   img: string;
 }
 
@@ -27,8 +27,6 @@ const circles: CircleProps[] = [
 
 function MagneticCircle({ size, img, top, left }: CircleProps) {
   const circleRef = useRef<HTMLDivElement>(null);
-
-  // Motion values for smooth animation
   const x = useMotionValue(0);
   const y = useMotionValue(0);
   const springX = useSpring(x, { stiffness: 150, damping: 12 });
@@ -39,7 +37,7 @@ function MagneticCircle({ size, img, top, left }: CircleProps) {
     if (!rect) return;
     const offsetX = e.clientX - (rect.left + rect.width / 2);
     const offsetY = e.clientY - (rect.top + rect.height / 2);
-    x.set(offsetX * 0.3); // magnetic pull strength
+    x.set(offsetX * 0.3);
     y.set(offsetY * 0.3);
   };
 
@@ -59,27 +57,44 @@ function MagneticCircle({ size, img, top, left }: CircleProps) {
         translateX: springX,
         translateY: springY,
       }}
-      className="absolute rounded-full p-1 border-2 border-gray-700 -translate-x-1/2 -translate-y-1/2 cursor-pointer"
+      className="absolute hidden md:flex rounded-full p-6 glass soft-shadow -translate-x-1/2 -translate-y-1/2 cursor-pointer items-center justify-center"
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
     >
-      <img src={img} alt="skill" className="w-full h-full object-contain rounded-full flex justify-center items-center" />
+      <img src={img} alt="skill" className="w-full h-full object-contain grayscale hover:grayscale-0 transition-all duration-500" />
     </motion.div>
   );
 }
 
 export default function SkillsSection() {
   return (
-    <section className="relative w-full h-screen flex items-center justify-center overflow-hidden pt-36">
-      {/* Center title */}
-      <h2 className="absolute text-white text-5xl font-bold z-20 tracking-wider font-poppins">Skills</h2>
+    <section className="relative w-full min-h-screen flex flex-col items-center justify-center overflow-hidden py-24 md:py-32 bg-[var(--surface-container-low)]">
+      <div className="absolute inset-0 dot-grid-svg opacity-30" />
+      
+      <div className="relative z-10 text-center mb-12 md:mb-20 px-6 reveal stagger-1">
+        <p className="label-md text-[var(--primary)] mb-2">Capabilities</p>
+        <h2 className="headline-lg text-[var(--on-surface)]">Technical Toolkit</h2>
+      </div>
 
-      {/* Orbit animation container */}
-      <div className="absolute w-full h-full animate-orbit">
+      {/* Desktop Cloud View */}
+      <div className="hidden md:flex relative w-full h-[600px] justify-center items-center">
         {circles.map((circle, index) => (
           <MagneticCircle key={index} {...circle} />
+        ))}
+      </div>
+
+      {/* Mobile Grid View */}
+      <div className="flex md:hidden flex-wrap justify-center gap-6 px-10 relative z-10">
+        {circles.map((circle, index) => (
+          <div 
+            key={index} 
+            className="w-20 h-20 rounded-2xl glass soft-shadow p-4 flex items-center justify-center"
+          >
+            <img src={circle.img} alt="skill" className="w-full h-full object-contain" />
+          </div>
         ))}
       </div>
     </section>
   );
 }
+

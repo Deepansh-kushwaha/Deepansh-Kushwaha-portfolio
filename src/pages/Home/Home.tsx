@@ -1,137 +1,113 @@
-// import Scrollable from "../components/Scrollable"
-
+import { Link } from "react-router";
 import "./Home.css";
 import Footer from "../../components/Footer";
-import LiquidButton from "../../components/LiquidButton";
 import Swiperslide from "../../components/swiperslide/Swiperslide";
 import SkillsSection from "../../components/SkillsSection";
 import Magnetic from "../../components/Magnetic";
 import MouseFollower from "../../components/MouseFollower";
+import Testimonials from "../../components/Testimonials";
+import Newsletter from "../../components/Newsletter";
 
 function Home() {
-   
-
   return (
     <>
-   
-    <main className="bg-gradient-to-b from-gray-950 via-black to-gray-950 "> 
- 
-
-      <section className="hero dot-grid-svg  h-screen flex  ">
-        <div
-          className="flex items-center justify-center min-h-98 relative overflow-hidden w-full "
-          id="Hero"
-        >
-          <div className="relative flex flex-col items-center text-white z-10 ">
-            <div className="relative z-2 p-11">
-              <Magnetic strength={0.1}>
-              <h1 className="text-9xl mr-[25rem] md:text-8xl font-extrabold leading-18 tracking-tighter bg-[url('https://ik.imagekit.io/sheryians/Aptitude%20&%20Reasoning/bloomMask%20Large_lvwFbM14_l.png')] bg-center text-clip pb-1  cursor-pointer">
-                
-                DEEPANSH
+      <main className="bg-[var(--surface)] text-[var(--on-surface)] selection:bg-[var(--primary)] selection:text-white">
+        <section className="hero dot-grid-svg h-screen flex relative overflow-hidden">
+          <div className="container mx-auto px-6 md:px-24 flex flex-col justify-center h-full relative z-10">
+            <div className="reveal stagger-1">
+              <p className="label-md text-[var(--primary)] mb-4">Personal Portfolio</p>
+              <h1 className="display-lg max-w-4xl">
+                DEEPANSH <br />
+                <span className="text-[var(--primary)] text-outline-primary">KUSHWAHA</span>
               </h1>
-              
-              </Magnetic>
-              <p className="text-base sm:text-lg font-light mr-75 text-center">
-                Simmmmmply
+            </div>
+
+            <div className="reveal stagger-2 mt-12 md:max-w-md">
+              <p className="body-lg text-[var(--on-surface)] opacity-80">
+                Curating digital experiences through intentional design and fluid motion. A sommelier of code and aesthetics.
               </p>
             </div>
 
-            <div className="relative -mt-8 sm:-mt-12 z-2 ">
-              <p className="text-base text-center ml-75  sm:text-lg font-light">
-                Awwwwwsome
-              </p>
+            <div className="reveal stagger-3 mt-16">
               <Magnetic strength={0.1}>
-              <h1 className="text-9xl ml-[25rem]  md:text-8xl font-extrabold leading-14 tracking-tighter bg-[url('https://ik.imagekit.io/sheryians/Aptitude%20&%20Reasoning/bloomMask%20Large_lvwFbM14_l.png')] text-clip pb-4 cursor-pointer ">
-                KUSHWAHA
-              </h1>
+                <Link to="/about" className="btn-primary">
+                  Explore Work <i className="ri-arrow-right-up-line"></i>
+                </Link>
               </Magnetic>
             </div>
           </div>
-        </div>
-          <MouseFollower
-        imgSrc="https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExNTNqdjRha2E5b3hlbWJlNndweTQxY3czcTFiMXZ1bTdqbXc2bDVsMSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/Vf3ZKdillTMOOaOho0/giphy.gif"
-        size={200}
-        skewAmount={15}
-        blurIntensity={3}
-        glowColor="rgba(255,255,255,0)"
-        stiffness={100}
-        damping={30}
-      />
-      </section>
-      {/* <Scrollable /> */}
 
-      <section className="p-10 flex flex-col justify-center min-h-screen ">
-        <h1 className="mt-20 text-7xl text-white text-center font-poppins font-extrabold">
-          Projects{" "}
-        </h1>
-        <Swiperslide/>
-       
-        <div className="flex items-center justify-center">
+          <MouseFollower />
+        </section>
 
-          <Magnetic strength={1}>
-          <LiquidButton
-            text="View more"
-            textclass="ri-arrow-right-line font-bold font-poppins text-white"
-            color={"#FF5E5E"}
-            layout="linkbutton"
-            link="/projects"
-            />
-            </Magnetic>
-        </div>
-      </section>
+        <section id="features" className="bg-[var(--surface)]">
+          <SkillsSection />
+        </section>
 
-      <SkillsSection/>
-      <section className="min-h-screen flex flex-col justify-center">
-        <h1 className="mt-20 text-7xl text-white text-center font-poppins font-extrabold">
-          Get In Touch
-        </h1>
-        <div className="socials flex items-center justify-center gap-30 mt-10">
-          <Magnetic strength={1}>
+        <section id="projects" className="p-10 md:p-24 flex flex-col justify-center min-h-screen bg-[var(--surface-container-low)]">
+          <div className="reveal stagger-1 mb-16">
+            <p className="label-md text-[var(--primary)]">Curated Selection</p>
+            <h2 className="headline-lg">Selected Projects</h2>
+          </div>
 
-          <LiquidButton
-            text=""
-            textclass="ri-linkedin-box-line logos "
-            color={"#BBBAFF"}
-            layout="social-container"
-            link="https://www.linkedin.com/in/deepansh-kushwaha"
-            />
-            </Magnetic>
+          <div className="reveal stagger-2">
+            <Swiperslide />
+          </div>
+
+          <div className="flex items-center justify-center mt-20 reveal stagger-3">
             <Magnetic strength={1}>
-
-          <LiquidButton
-            text=""
-            textclass="ri-github-line logos"
-            color={"#92FF8D"}
-            layout="social-container"
-            link="https://github.com/Deepansh-kushwaha"
-            />
+              <Link to="/projects" className="btn-primary">
+                View All Projects <i className="ri-arrow-right-line"></i>
+              </Link>
             </Magnetic>
-            <Magnetic strength={1}>
+          </div>
+        </section>
 
-          <LiquidButton
-            text=""
-            textclass="ri-instagram-line logos"
-            color={"#FFFCA5"}
-            layout="social-container"
-            link="https://instagram.com/deepansh_kushwaha"
-            />
-            </Magnetic>
-            <Magnetic strength={1}>
+        <Testimonials />
 
-          <LiquidButton
-            text=""
-            textclass="ri-mail-line logos"
-            color={"#FF7373"}
-            layout="social-container"
-            link="mailto:deepanshkushwaha9@gmail"
-            />
+        <section className="min-h-screen flex flex-col justify-center items-center text-center p-10 md:p-24 relative overflow-hidden">
+          <div className="reveal stagger-1">
+            <p className="label-md text-[var(--primary)] text-center">Inquiries</p>
+            <h2 className="display-lg text-center mb-16">Let's Create<br />Something Fluid</h2>
+          </div>
+
+          <div className="reveal stagger-2 flex flex-wrap items-center justify-center gap-8 md:gap-16 mt-10">
+            <Magnetic strength={0.5}>
+              <a href="https://www.linkedin.com/in/deepansh-kushwaha" target="_blank" rel="noreferrer"
+                className="glass soft-shadow p-8 rounded-full text-4xl hover:text-[var(--primary)] transition-colors">
+                <i className="ri-linkedin-box-line"></i>
+              </a>
             </Magnetic>
+            <Magnetic strength={0.5}>
+              <a href="https://github.com/Deepansh-kushwaha" target="_blank" rel="noreferrer"
+                className="glass soft-shadow p-8 rounded-full text-4xl hover:text-[var(--primary)] transition-colors">
+                <i className="ri-github-line"></i>
+              </a>
+            </Magnetic>
+            <Magnetic strength={0.5}>
+              <a href="https://instagram.com/deepansh_kushwaha" target="_blank" rel="noreferrer"
+                className="glass soft-shadow p-8 rounded-full text-4xl hover:text-[var(--primary)] transition-colors">
+                <i className="ri-instagram-line"></i>
+              </a>
+            </Magnetic>
+            <Magnetic strength={0.5}>
+              <a href="mailto:deepanshkushwaha9@gmail.com"
+                className="glass soft-shadow p-8 rounded-full text-4xl hover:text-[var(--primary)] transition-colors">
+                <i className="ri-mail-line"></i>
+              </a>
+            </Magnetic>
+          </div>
+        </section>
+
+        <Newsletter />
+
+        <div className="mt-20 w-full relative z-10">
+          <Footer />
         </div>
-        <Footer />
-      </section>
-            </main>
+      </main>
     </>
   );
 }
 
 export default Home;
+

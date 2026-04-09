@@ -1,9 +1,10 @@
-
 import AboutSection from "../components/AboutSection";
+import Stats from "../components/Stats";
 import me from '../assets/me.jpg';
+
 export default function About() {
   return (
-    <main className="min-h-screen bg-black text-slate-100">
+    <main className="min-h-screen bg-[var(--surface)] text-[var(--on-surface)]">
       <AboutSection
         name="Deepansh Kushwaha"
         title="Full-Stack Web Developer"
@@ -25,6 +26,8 @@ export default function About() {
           { label: "Email", href: "mailto:deepanshkushwaha9@gmail.com?subject=Inquiry&body=I would like to know more about your services."},
         ]}
       />
+      <Stats />
     </main>
   );
 }
+

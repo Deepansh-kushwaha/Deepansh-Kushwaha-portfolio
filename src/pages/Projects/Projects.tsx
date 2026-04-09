@@ -1,82 +1,71 @@
-import { Canvas } from "@react-three/fiber"
+import { Link } from "react-router"
 import "./project.css"
-import { OrbitControls } from "@react-three/drei"
-import  Scene  from "./Cyl"
-import { Bloom, EffectComposer, ToneMapping } from "@react-three/postprocessing"
 import Card from "../../components/Card"
+import Magnetic from "../../components/Magnetic"
 import { useGSAP } from "@gsap/react"
 import gsap from "gsap"
 import { ScrollTrigger } from "gsap/ScrollTrigger"
 function Projects() {
-
   const project = [
     {
-    image1:"src/assets/cyberpunk.png",
-    image2:"src/assets/cuberto.png",
-  },
-    {
-    image1:"src/assets/cyberpunk.png",
-    image2:"src/assets/cuberto.png",
-  },
-    {
-    image1:"src/assets/cyberpunk.png",
-    image2:"src/assets/cuberto.png",
-  },
-]
-
-gsap.registerPlugin(ScrollTrigger );
-
-useGSAP(() => {
-  gsap.from(".hero",{
-    height: 1,
-    stagger:{
-      amount: 0.5,
-
+      image1: "src/assets/cyberpunk.png",
+      image2: "src/assets/cuberto.png",
     },
-    scrollTrigger: {
-      trigger: ".lol",
-      markers: true,
-      start: "top 100%",
-      end: "top -150%",
-      scrub: true
-    }
+    {
+      image1: "src/assets/cyberpunk.png",
+      image2: "src/assets/cuberto.png",
+    },
+    {
+      image1: "src/assets/cyberpunk.png",
+      image2: "src/assets/cuberto.png",
+    },
+  ]
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  useGSAP(() => {
+    gsap.from(".project-row", {
+      opacity: 0,
+      y: 100,
+      duration: 1,
+      stagger: 0.3,
+      scrollTrigger: {
+        trigger: ".project-list",
+        start: "top 80%",
+        end: "bottom 20%",
+        toggleActions: "play none none reverse"
+      }
+    })
   })
-})
 
-  return (<>
-  <div className="wrapper">
+  return (
+    <main className="bg-[var(--surface)] min-h-screen pt-32 pb-24">
+      <div className="container mx-auto px-6 md:px-24">
+        <header className="mb-24 reveal stagger-1">
+          <p className="label-md text-[var(--primary)] mb-4">Curated Portfolio</p>
+          <h1 className="display-lg">SELECTED <br/><span className="text-[var(--primary)]">WORKS</span></h1>
+        </header>
 
-    <Canvas  className="w-full h-screen" flat  camera={{fov:30}}>
-      <OrbitControls enableDamping enableZoom={false} />
-      <ambientLight/>
-      <directionalLight intensity={0.8} position={[0,-1,4]}/>
-      <Scene />  
-      <EffectComposer >
-      <Bloom
-      mipmapBlur // Enables or disables mipmap blur.
-      intensity={1.0} // The bloom intensity.  
-      luminanceThreshold={0.8} // luminance threshold. Raise this value to mask out darker elements in the scene.
-      luminanceSmoothing={0.0205} // smoothness of the luminance threshold. Range is [0, 1]
-      />
-      <ToneMapping adaptive />
-      </EffectComposer>
-      
-      </Canvas>
-    <div>
-      <div>
-      <h1 className="text-[20vh] font-[font3] text-white font-bold">Projects 2.0</h1>
-      </div>
-    </div>
-    <div className="-mt-5 lol">
-      {project.map( (elem ,i) =>(
-         <div key={i}  className="hero w-full h-[80vh] mb-5  flex gap-3">
-        <Card image1={elem.image1} image2={elem.image2}/>
-        </div>
-        ))}
+        <section className="project-list flex flex-col gap-20 md:gap-24">
+          {project.map((elem, i) => (
+            <div key={i} className="project-row h-auto md:h-[80vh]">
+              <Card image1={elem.image1} image2={elem.image2} />
+            </div>
+          ))}
+        </section>
 
+
+        <section className="mt-32 md:mt-48 h-[60vh] flex flex-col justify-center items-center text-center bg-[var(--surface-container-low)] rounded-[3rem] p-12">
+            <p className="label-md text-[var(--primary)] mb-6">Collaboration</p>
+            <h2 className="headline-lg mb-12">Have a project in mind?</h2>
+            <Magnetic strength={0.3}>
+                <Link to="/contact" className="btn-primary py-4 px-12 text-lg">
+                    Let's Connect <i className="ri-mail-send-line"></i>
+                </Link>
+            </Magnetic>
+        </section>
       </div>
-      </div>
-    </>
+    </main>
   )
 }
 
