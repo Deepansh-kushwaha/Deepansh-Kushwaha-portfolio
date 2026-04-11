@@ -4,6 +4,10 @@ import tailwindcss from '@tailwindcss/vite'
 
 
 export default defineConfig({
-  plugins: [react(),tailwindcss()],
-  // base: '/Deepansh-Kushwaha-portfolio',
+  plugins: [react(), tailwindcss()],
+  build: {
+    assetsInlineLimit: 0, 
+    chunkSizeWarningLimit: 2000,
+  }
 })
+
