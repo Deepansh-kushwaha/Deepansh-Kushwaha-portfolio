@@ -5,5 +5,5 @@ import tailwindcss from '@tailwindcss/vite'
 
 export default defineConfig({
   plugins: [react(),tailwindcss()],
-  base: '/Deepansh-Kushwaha-portfolio',
+  // base: '/Deepansh-Kushwaha-portfolio',
 })

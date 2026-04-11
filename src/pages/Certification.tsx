@@ -207,7 +207,7 @@ export default function CertificationHallPage() {
   return (
     <div
       ref={containerRef}
-      className="min-h-screen bg-[var(--surface)] text-[var(--on-surface)] p-6 md:p-10 pt-32"
+      className="min-h-screen bg-[var(--surface)] text-[var(--on-surface)] p-6 md:p-10 mt-32"
     >
       <header className="relative overflow-hidden mb-20">
         <div className="absolute inset-0 -z-10 opacity-30">
