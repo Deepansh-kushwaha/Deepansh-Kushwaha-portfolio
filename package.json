@@ -34,11 +34,11 @@
     "remixicon": "^4.6.0",
     "styled-components": "^6.1.19",
     "swiper": "^11.2.10",
-    "three": "0.178.2"
+    "three": "0.178.0"
 
   },
   "overrides": {
-    "three": "0.178.2"
+    "three": "0.178.0"
   },
   "devDependencies": {
     "@eslint/js": "^9.30.1",
