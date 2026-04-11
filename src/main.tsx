@@ -10,10 +10,9 @@ createRoot(document.getElementById('root')!).render(
   <StrictMode>
  
     <Router basename={import.meta.env.BASE_URL}>
-       <Stairs >
-         <App />
-       </ Stairs>
+      <App />
     </Router>
+
     
   </StrictMode>,
 )

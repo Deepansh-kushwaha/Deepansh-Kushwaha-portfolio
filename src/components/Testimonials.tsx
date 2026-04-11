@@ -4,18 +4,18 @@ import { motion, AnimatePresence } from 'framer-motion';
 const testimonials = [
   {
     quote: "Deepansh's eye for detail and fluid animations transformed our brand's digital presence into something truly premium.",
-    author: "Sarah Jenkins",
-    role: "Creative Director, Studio X",
+    author: "Tanu Dhiman",
+    role: "Product Manager",
   },
   {
     quote: "A sommelier of code indeed. The technical performance matched the stunning aesthetics perfectly.",
-    author: "Michael Chen",
-    role: "Product Manager, TechFlow",
+    author: "Ashish Kushwaha",
+    role: "CEO",
   },
   {
     quote: "The final product was more than a website; it was a calibrated emotional experience. Highly recommended.",
-    author: "Alex Rivera",
-    role: "Brand Architect",
+    author: "Jeff Bridges",
+    role: "Brand",
   }
 ];
 

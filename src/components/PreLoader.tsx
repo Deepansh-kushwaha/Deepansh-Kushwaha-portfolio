@@ -1,15 +1,12 @@
 import { useEffect, useState } from 'react';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 
-const words = ["Studio", "Motion", "Architecture", "Precision", "Fluidity"];
+const words = ["Innovation", "Precision", "Fluidity", "Architecture", "Studio"];
 
 const PreLoader = ({ finishLoading }: { finishLoading: () => void }) => {
   const [index, setIndex] = useState(0);
-  const [dimension, setDimension] = useState({ width: 0, height: 0 });
 
   useEffect(() => {
-    setDimension({ width: window.innerWidth, height: window.innerHeight });
-
     if (index === words.length - 1) {
       setTimeout(() => {
         finishLoading();
@@ -19,47 +16,60 @@ const PreLoader = ({ finishLoading }: { finishLoading: () => void }) => {
 
     const timeout = setTimeout(() => {
       setIndex(index + 1);
-    }, index === 0 ? 1000 : 150);
+    }, index === 0 ? 1200 : 180); // Slightly adjusted timing for better rhythm
 
     return () => clearTimeout(timeout);
   }, [index, finishLoading]);
 
-  const initialPath = `M0 0 L${dimension.width} 0 L${dimension.width} ${dimension.height} Q${dimension.width / 2} ${dimension.height + 300} 0 ${dimension.height}  L0 0`;
-  const targetPath = `M0 0 L${dimension.width} 0 L${dimension.width} ${dimension.height} Q${dimension.width / 2} ${dimension.height} 0 ${dimension.height}  L0 0`;
-
-  const curve: any = {
+  // Framer Motion variants for the staggered stairs - High-End "Liquid" easing
+  const stairVariants = {
     initial: {
-      d: initialPath,
-      transition: { duration: 0.7, ease: [0.76, 0, 0.24, 1] }
+      top: 0,
     },
-    exit: {
-      d: targetPath,
-      transition: { duration: 0.7, ease: [0.76, 0, 0.24, 1], delay: 0.3 }
-    }
+    exit: (i: number) => ({
+      top: "100vh",
+      transition: {
+        duration: 0.9,
+        delay: 0.05 * i, // Reduced for a more fluid "wave" effect
+        ease: [0.76, 0, 0.24, 1] // The Boutique Studio standard ease
+      }
+    })
   };
 
   return (
-    <motion.div
-      initial={{ top: 0 }}
-      exit={{ top: "-100vh" }}
-      transition={{ duration: 0.8, ease: [0.76, 0, 0.24, 1], delay: 0.2 }}
-      className="fixed inset-0 z-[100] flex items-center justify-center bg-[var(--surface-container-highest)]"
-    >
-      {dimension.width > 0 && (
-        <>
-          <motion.p
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            className="flex items-center absolute z-20 text-white headline-lg text-4xl md:text-6xl uppercase tracking-[0.2em]"
-          >
-            <span className="w-4 h-4 rounded-full bg-white mr-6 block animate-pulse"></span>
-            {words[index]}
-          </motion.p>
-          <svg className="absolute top-0 w-full h-[calc(100%+300px)] fill-[var(--surface-container-highest)]">
-            <motion.path variants={curve} initial="initial" exit="exit"></motion.path>
-          </svg>
-        </>
-      )}
+    <motion.div className="fixed inset-0 z-[100] pointer-events-none overflow-hidden">
+      {/* 1. The Word Cycling Display */}
+      <AnimatePresence mode="wait">
+        <motion.div
+           key={index}
+           initial={{ opacity: 0 }}
+           animate={{ opacity: 1 }}
+           exit={{ opacity: 0 }}
+           transition={{ duration: 0.4, ease: "easeInOut" }}
+           className="fixed inset-0 z-[110] flex items-center justify-center text-white pointer-events-none"
+        >
+           <div className="flex items-center">
+             <span className="w-1.5 h-1.5 rounded-full bg-[var(--primary)] mr-6 block animate-pulse"></span>
+             <h2 className="headline-lg text-2xl md:text-4xl lg:text-5xl uppercase tracking-[0.4em] font-light">
+                {words[index]}
+             </h2>
+           </div>
+        </motion.div>
+      </AnimatePresence>
+
+      {/* 2. The Combined Stairs Background */}
+      <div className="flex w-screen h-screen">
+        {[...Array(5)].map((_, i) => (
+          <motion.div
+            key={i}
+            variants={stairVariants as any}
+            initial="initial"
+            exit="exit"
+            custom={i}
+            className="h-full w-1/5 bg-[var(--surface-container-highest)] relative will-change-transform"
+          />
+        ))}
+      </div>
     </motion.div>
   );
 };
