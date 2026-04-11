@@ -15,7 +15,7 @@ function Form() {
     setStatus("Sending...");
 
     try {
-      const response = await fetch("http://localhost:5000/api/contact", {
+      const response = await fetch("/api/contact", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -23,18 +23,28 @@ function Form() {
         body: JSON.stringify(formData),
       });
 
+      const contentType = response.headers.get("content-type");
+      if (!contentType || !contentType.includes("application/json")) {
+        const errorText = await response.text();
+        console.error("Server Error Response:", errorText);
+        throw new Error("Server communication failed. Check your console for details.");
+      }
+
       const data = await response.json();
+
       if (data.success) {
         setStatus("Message sent successfully!");
         setFormData({ fullName: "", email: "", message: "" });
       } else {
-        setStatus("Failed to send message.");
+        setStatus("Failed to send message: " + (data.message || "Unknown error"));
       }
     } catch (error) {
       console.error("Error:", error);
       setStatus("Error connecting to server.");
     }
   };
+
+
 
   return (
     <form onSubmit={handleSubmit} className="flex flex-col gap-6 w-full max-w-lg mx-auto p-8 rounded-[2rem] bg-[var(--surface-container-low)] soft-shadow">

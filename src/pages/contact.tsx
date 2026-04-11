@@ -13,8 +13,7 @@ function Contact() {
     const ctx = gsap.context(() => {
       const sections = gsap.utils.toArray<HTMLElement>(".snap-section");
       
-      // Dynamic Snap Point Calculation
-      ScrollTrigger.create({
+      const st = ScrollTrigger.create({
         trigger: containerRef.current,
         start: "top top",
         end: "bottom bottom",
@@ -28,14 +27,32 @@ function Contact() {
           ease: "power2.inOut"
         }
       });
+
+      // Disable snapping when typing to prevent jitter
+      const handleFocus = () => st.disable();
+      const handleBlur = () => st.enable();
+
+      const formElements = document.querySelectorAll('input, textarea');
+      formElements.forEach(el => {
+        el.addEventListener('focus', handleFocus);
+        el.addEventListener('blur', handleBlur);
+      });
+
+      return () => {
+        formElements.forEach(el => {
+          el.removeEventListener('focus', handleFocus);
+          el.removeEventListener('blur', handleBlur);
+        });
+      };
     }, containerRef);
     return () => ctx.revert();
   }, []);
 
 
 
+
   return (
-    <main ref={containerRef} className="bg-[var(--surface)] text-[var(--on-surface)] selection:bg-[var(--primary)] pt-12">
+    <main ref={containerRef} className="bg-[var(--surface)] text-[var(--on-surface)] selection:bg-[var(--primary)] pt-36 pb-32">
       <div className="container mx-auto px-6 md:px-24">
         
         {/* Section 1: Header */}

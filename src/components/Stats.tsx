@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
+
 import { motion, useSpring, useTransform, useMotionValue } from 'framer-motion';
 
 interface StatItemProps {
