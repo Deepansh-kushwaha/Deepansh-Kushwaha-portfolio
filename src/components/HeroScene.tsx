@@ -31,8 +31,7 @@ function Ripple() {
 
 function Model({ scrollY }: { scrollY: number }) {
   // Ultra-robust pathing for Vite
-  const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, "");
-  const modelPath = `${baseUrl}/mecha_hunter_katana.glb`;
+  const modelPath = "/mecha_hunter_katana.glb";
 
   const { scene } = useGLTF(modelPath);
   const modelRef = useRef<THREE.Group>(null);
@@ -147,7 +146,7 @@ export default function HeroScene() {
   );
 }
 
-useGLTF.preload(`${import.meta.env.BASE_URL}/mecha_hunter_katana.glb`);
+useGLTF.preload("/mecha_hunter_katana.glb");
 
 
 
