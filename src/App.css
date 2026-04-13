@@ -1,34 +1,165 @@
 @import "tailwindcss";
 @import 'remixicon/fonts/remixicon.css';
-@font-face {
-  font-family: font1;
-  src: url(/Fonts/Lausanne-300.woff2);
-}
-@font-face {
-  font-family: font2;
-  src: url(/Fonts/Lausanne-500.woff2);
-}
-@font-face {
-  font-family: font3;
-  src: url(/Fonts/Gilroy-Extrabold_YC6oQDa3Ix.ttf);
-}
-@font-face {
-  font-family: font4;
-  src: url(/Fonts/Gilroy-Light.woff2);
-}
-@font-face {
-  font-family: font5;
-  src: url(/Fonts/Gilroy-Medium_eHDK2RllDd.ttf);
-}
-:root {
-font-family: poppins, system-ui, Avenir, Helvetica, Arial, sans-serif;
-background-color: #0c0c0c;
-scroll-behavior: smooth;
 
+:root {
+  /* Colors */
+  --surface: #faf9fb;
+  --surface-container-low: #f5f3f6;
+  --surface-container: #efedf0;
+  --surface-container-high: #e3e1e4;
+  --surface-container-highest: #d7d5d8;
+  --surface-container-lowest: #ffffff;
+  
+  --primary: #b81400;
+  --primary-container: #e3240a;
+  --on-primary: #ffffff;
+  
+  --secondary-container: #fcaf38;
+  --on-secondary-container: #6c4500;
+  
+  --on-surface: #1b1c1e;
+  --outline-variant: #1b1c1e;
+
+  /* Typography */
+  --font-display: 'Epilogue', sans-serif;
+  --font-headline: 'Epilogue', sans-serif;
+  --font-body: 'Manrope', sans-serif;
+  --font-label: 'Space Grotesk', sans-serif;
+
+  scroll-behavior: smooth;
 }
-  .dot-grid-svg {
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10' viewBox='0 0 20 20'%3E%3Ccircle cx='2' cy='2' r='1.5' fill='rgba(255,255,255,0.12)'/%3E%3C/svg%3E");
-      background-repeat: repeat;
-      background-size: 5px 5px; /* change to control gap */
-    }
+
+body {
+  background-color: var(--surface);
+  color: var(--on-surface);
+  font-family: var(--font-body);
+  line-height: 1.6;
+  margin: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Typography Utility Classes */
+.display-lg {
+  font-family: var(--font-display);
+  font-size: 4.5rem;
+  font-weight: 800;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+}
+
+@media (max-width: 768px) {
+  .display-lg {
+    font-size: 2.75rem;
+  }
+}
+
+.headline-lg {
+  font-family: var(--font-headline);
+  font-size: 2.5rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+@media (max-width: 768px) {
+  .headline-lg {
+    font-size: 1.75rem;
+  }
+}
+
+.body-lg {
+  font-size: 1.125rem;
+  line-height: 1.6;
+}
+
+.label-md {
+  font-family: var(--font-label);
+  font-size: 0.875rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+
+/* Design Rules */
+.glass {
+  background: rgba(250, 249, 251, 0.7);
+  backdrop-filter: blur(24px);
+}
+
+.primary-gradient {
+  background: linear-gradient(135deg, var(--primary), var(--primary-container));
+}
+
+.soft-shadow {
+  box-shadow: 0 10px 40px rgba(27, 28, 30, 0.06);
+}
+
+/* Animations */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.reveal {
+  animation: fadeInUp 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+  opacity: 0;
+}
+
+.stagger-1 { animation-delay: 0.1s; }
+.stagger-2 { animation-delay: 0.2s; }
+.stagger-3 { animation-delay: 0.3s; }
+.stagger-4 { animation-delay: 0.4s; }
+
+/* Fluid Button */
+.btn-primary {
+  background-color: var(--primary);
+  color: var(--on-primary);
+  padding: 0.75rem 2rem;
+  border-radius: 1.5rem;
+  font-family: var(--font-label);
+  transition: all 300ms cubic-bezier(0.2, 0.8, 0.2, 1);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+/* Lenis Smooth Scroll */
+html.lenis, html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+.lenis.lenis-scrolling iframe {
+  pointer-events: none;
+}
+
+.btn-primary:hover {
+  transform: scale(1.02);
+  background: linear-gradient(135deg, var(--primary), var(--primary-container));
+}
+
+.dot-grid-svg {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10' viewBox='0 0 20 20'%3E%3Ccircle cx='2' cy='2' r='1.5' fill='rgba(27,28,30,0.05)'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 20px 20px;
+}
+
 

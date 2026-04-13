@@ -146,51 +146,52 @@ const AboutSection: React.FC<AboutProps> = ({
   return (
     <section
       ref={rootRef}
-      className="relative overflow-hidden bg-gradient-to-b from-gray-950 via-black to-gray-950"
+      className="relative overflow-hidden bg-[var(--surface)] text-[var(--on-surface)]"
       aria-label="About"
     >
       {/* Background accents */}
-      <div className="pointer-events-none absolute inset-0">
-        <div className="absolute -left-24 top-20 h-64 w-64 rounded-full bg-cyan-500/10 blur-3xl" />
-        <div className="absolute -right-24 top-40 h-72 w-72 rounded-full bg-indigo-500/10 blur-3xl" />
-        <div className="absolute bottom-0 left-1/2 h-80 w-[48rem] -translate-x-1/2 bg-gradient-to-t from-cyan-500/10 to-transparent blur-3xl" />
+      <div className="pointer-events-none absolute inset-0 opacity-20">
+        <div className="absolute -left-24 top-20 h-64 w-64 rounded-full bg-[var(--primary)] blur-[100px]" />
+        <div className="absolute -right-24 top-40 h-72 w-72 rounded-full bg-[var(--secondary-container)] blur-[100px]" />
       </div>
 
-      <div className="container mx-auto grid max-w-6xl grid-cols-1 items-center gap-10 px-6 py-20 md:grid-cols-2 md:gap-12 lg:py-28">
+      <div className="container mx-auto grid max-w-6xl grid-cols-1 items-center gap-10 px-6 py-20 md:grid-cols-2 md:gap-24 lg:py-32">
         {/* Text side */}
         <div className="relative z-10">
           <div
             ref={badgeRef}
-            className="mb-4 inline-flex items-center gap-2 rounded-full border border-slate-700/60 bg-slate-800/40 px-3 py-1 text-xs text-slate-300 backdrop-blur"
+            className="mb-6 inline-flex items-center gap-2 rounded-full bg-[var(--surface-container)] px-4 py-1.5 text-xs label-md text-[var(--on-surface)]"
           >
-            <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-emerald-400" />
+            <span className="h-2 w-2 animate-pulse rounded-full bg-[var(--primary)]" />
             Open to opportunities
           </div>
 
           <h2
             ref={headlineRef}
-            className="mb-4 text-3xl font-semibold leading-tight text-slate-100 md:text-4xl"
+            className="mb-8 display-lg text-[var(--on-surface)]"
           >
-            {name} — {title}
+            {name}
           </h2>
+          
+          <p className="label-md text-[var(--primary)] mb-4">{title}</p>
 
           <p
             ref={bioRef}
-            className="mb-6 max-w-prose text-slate-300/90 md:text-lg"
+            className="mb-10 max-w-prose body-lg opacity-80"
           >
             {bio}
           </p>
 
           {/* Skills */}
-          <div ref={skillsRef} className="mb-8">
-            <div className="mb-2 text-sm uppercase tracking-wider text-slate-400">
-              Core Skills
+          <div ref={skillsRef} className="mb-12">
+            <div className="mb-4 label-md text-[var(--on-surface)] opacity-50">
+              Core Expertise
             </div>
-            <div className="flex flex-wrap gap-2">
+            <div className="flex flex-wrap gap-3">
               {skills.map((s) => (
                 <span
                   key={s}
-                  className="rounded-md border border-slate-700/60 bg-slate-800/40 px-3 py-1 text-sm text-slate-200"
+                  className="rounded-full bg-[var(--surface-container-low)] px-5 py-2 text-sm font-medium label-md border border-[var(--surface-container)]"
                 >
                   {s}
                 </span>
@@ -199,42 +200,30 @@ const AboutSection: React.FC<AboutProps> = ({
           </div>
 
           {/* CTAs */}
-          <div ref={ctaRef} className="flex flex-wrap items-center gap-4">
+          <div ref={ctaRef} className="flex flex-wrap items-center gap-6">
             <a
               href={resumeUrl}
               target="_blank"
-              className="group relative inline-flex items-center gap-2 rounded-lg bg-gradient-to-r from-cyan-500 to-indigo-500 px-4 py-2 text-sm font-medium text-white shadow-lg shadow-cyan-500/20 transition-transform duration-300 hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:ring-offset-2 focus:ring-offset-slate-900"
+              className="btn-primary"
               aria-label="Download Resume"
             >
-              <svg
-                width="18"
-                height="18"
-                viewBox="0 0 24 24"
-                className="shrink-0"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-              >
-                <path d="M12 3v12" />
-                <path d="m7 10 5 5 5-5" />
-                <path d="M5 21h14" />
-              </svg>
+              <i className="ri-download-line font-bold"></i>
               Download Resume
             </a>
 
             {socials.length > 0 && (
-              <div className="flex items-center gap-2">
+              <div className="flex items-center gap-4">
                 {socials.map((s) => (
                   <a
                     key={s.href}
                     href={s.href}
                     target="_blank"
                     rel="noreferrer"
-                    className="magnetic inline-flex h-10 w-10 items-center justify-center rounded-md border border-slate-700/60 bg-slate-800/40 text-slate-200 transition-colors hover:text-white focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:ring-offset-2 focus:ring-offset-slate-900"
+                    className="magnetic glass soft-shadow inline-flex h-12 w-12 items-center justify-center rounded-full text-[var(--on-surface)] transition-all hover:text-[var(--primary)] hover:scale-110"
                     aria-label={s.label}
                     title={s.label}
                   >
-                    <span className="text-sm">{iconFor(s.label)}</span>
+                    <i className={iconFor(s.label)}></i>
                   </a>
                 ))}
               </div>
@@ -243,29 +232,28 @@ const AboutSection: React.FC<AboutProps> = ({
         </div>
 
         {/* Avatar side */}
-        <div className="relative z-10">
+        <div className="relative z-10 flex justify-center md:justify-end">
           <div
             ref={avatarWrapRef}
-            className="relative mx-auto w-64 sm:w-72 md:w-80"
+            className="relative w-full max-w-[400px]"
           >
-            {/* Decorative rings */}
-            <div className="pointer-events-none absolute -inset-4 -z-10 rounded-[28px] bg-gradient-to-tr from-cyan-500/20 via-transparent to-indigo-500/20 blur-2xl" />
-            <div className="absolute -left-6 top-4 orb h-3 w-3 rounded-full bg-cyan-400 shadow-[0_0_24px_0_rgba(34,211,238,0.65)]" />
-            <div className="absolute -right-4 bottom-10 orb h-2.5 w-2.5 rounded-full bg-indigo-400 shadow-[0_0_24px_0_rgba(129,140,248,0.65)]" />
+            {/* Decorative fluid elements */}
+            <div className="absolute -left-6 top-4 orb h-4 w-4 rounded-full bg-[var(--primary)] shadow-[0_0_24px_rgba(184,20,0,0.5)]" />
+            <div className="absolute -right-4 bottom-10 orb h-3 w-3 rounded-full bg-[var(--secondary-container)] shadow-[0_0_24px_rgba(252,175,56,0.5)]" />
 
-            <div className="overflow-hidden rounded-2xl border border-slate-700/60 bg-slate-800/40 p-2 backdrop-blur">
-              <div className="overflow-hidden rounded-xl">
+            <div className="overflow-hidden rounded-[2rem] bg-[var(--surface-container-low)] p-4 soft-shadow">
+              <div className="overflow-hidden rounded-[1.5rem]">
                 <img
                   src={avatarUrl}
                   alt={`${name} portrait`}
-                  className="h-auto w-full scale-100 transform object-cover transition-transform duration-500 hover:scale-[1.02]"
+                  className="h-auto w-full scale-100 transform object-cover transition-transform duration-700 hover:scale-105"
                   loading="eager"
                 />
               </div>
             </div>
 
-            <div className="pointer-events-none absolute -bottom-7 left-1/2 -translate-x-1/2 rounded-full border border-gray-700/60 bg-gray-800/60  w-full px-4 py-1 text-xs text-gray-200 shadow backdrop-blur">
-              Based in the Web • Available Remote
+            <div className="absolute -bottom-8 left-1/2 -translate-x-1/2 bg-[var(--surface-container-highest)] px-8 py-3 rounded-full label-md text-[var(--on-surface)] glass soft-shadow whitespace-nowrap">
+              Based in India • Collaborative
             </div>
           </div>
         </div>
@@ -277,18 +265,18 @@ const AboutSection: React.FC<AboutProps> = ({
 function iconFor(label: "GitHub" | "LinkedIn" | "Twitter" | "X" | "Portfolio" | "Email") {
   switch (label) {
     case "GitHub":
-      return "GH";
+      return "ri-github-line";
     case "LinkedIn":
-      return "in";
+      return "ri-linkedin-box-line";
     case "Twitter":
     case "X":
-      return "X";
+      return "ri-twitter-x-line";
     case "Portfolio":
-      return "↗";
+      return "ri-global-line";
     case "Email":
-      return "M";
+      return "ri-mail-line";
     default:
-      return "•";
+      return "ri-links-line";
   }
 }
 
