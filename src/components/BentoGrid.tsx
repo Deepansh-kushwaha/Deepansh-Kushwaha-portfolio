@@ -1,7 +1,13 @@
 import { motion } from "framer-motion";
 import { getIKUrl } from "../utils/imageKit";
 
-const images = [
+interface ImageItem {
+  url: string;
+  title: string;
+  category: string;
+}
+
+const images: ImageItem[] = [
   { url: "https://ik.imagekit.io/ouw0qwets/portfolio/Jewellery3.webp", title: "Luminescence", category: "Identity" },
   { url: "https://ik.imagekit.io/ouw0qwets/portfolio/real%20estate.webp", title: "Skyward", category: "Engineering" },
   { url: "https://ik.imagekit.io/ouw0qwets/portfolio/original-cb28cbd4789e886882400836504f2167.webp", title: "Aurora Glass", category: "Interaction" },
@@ -45,7 +51,7 @@ export default function BentoGrid() {
   );
 }
 
-function ScrollingColumn({ items, duration, reverse }: { items: any[], duration: number, reverse: boolean }) {
+function ScrollingColumn({ items, duration, reverse }: { items: ImageItem[], duration: number, reverse: boolean }) {
   return (
     <motion.div
       animate={{
@@ -61,9 +67,11 @@ function ScrollingColumn({ items, duration, reverse }: { items: any[], duration:
       {/* Double mapping for seamless loop */}
       {[...items, ...items].map((image, idx) => (
         <div key={idx} className="relative group overflow-hidden rounded-[2rem] md:rounded-[3.5rem] bg-[var(--surface-container-high)] aspect-[3/4] w-full">
-           <img
-            src={getIKUrl(image.url, { width: 600, quality: 90 })}
+          <img
+            src={getIKUrl(image.url, { width: 400, quality: 80, format: 'auto' })}
             alt={image.title}
+            loading="lazy"
+            decoding="async"
             className="h-full w-full object-cover transition-all duration-1000 scale-110 group-hover:scale-100"
           />
           <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-700 flex flex-col justify-end p-8 md:p-12">

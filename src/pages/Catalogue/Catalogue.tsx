@@ -6,7 +6,20 @@ import { getIKUrl, getIKPlaceholder } from "../../utils/imageKit";
 
 const categories = ["All", "Interaction", "Engineering", "Creative 3D", "Identity"];
 
-const works = [
+interface Work {
+  id: number;
+  title: string;
+  category: string;
+  image: string;
+  description: string;
+  year: string;
+  client: string;
+  stack: string[];
+  platform: string;
+  features: string[];
+}
+
+const works: Work[] = [
   {
     id: 1,
     title: "Ethereal Luminaire",
@@ -71,7 +84,7 @@ const works = [
 
 function Catalogue() {
   const [activeFilter, setActiveFilter] = useState("All");
-  const [selectedProject, setSelectedProject] = useState<any>(null);
+  const [selectedProject, setSelectedProject] = useState<Work | null>(null);
 
   const filteredWorks = useMemo(() => {
     return works.filter(work => activeFilter === "All" || work.category === activeFilter);

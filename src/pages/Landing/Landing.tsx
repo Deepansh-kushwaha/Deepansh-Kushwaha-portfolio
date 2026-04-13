@@ -1,11 +1,14 @@
 import { useLayoutEffect, useRef, lazy, Suspense } from 'react';
 import { Link } from "react-router";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion } from "framer-motion";
 import type { Variants } from "framer-motion";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Magnetic from "../../components/Magnetic";
-import MouseFollower from "../../components/MouseFollower";
+
+// Lazy Components
+import HeroScene from "../../components/HeroScene";
+import { BentoSkeleton, SectionSkeleton } from '../../components/Skeleton';
 
 // Lazy Components
 const Footer = lazy(() => import("../../components/Footer"));
@@ -13,19 +16,15 @@ const Stats = lazy(() => import("../../components/Stats"));
 const Testimonials = lazy(() => import("../../components/Testimonials"));
 const Newsletter = lazy(() => import("../../components/Newsletter"));
 const SkillsSection = lazy(() => import("../../components/SkillsSection"));
-const HeroScene = lazy(() => import("../../components/HeroScene"));
 const BentoGrid = lazy(() => import("../../components/BentoGrid"));
+
 
 gsap.registerPlugin(ScrollTrigger);
 
 function Landing() {
   const containerRef = useRef(null);
   const marqueeRef = useRef(null);
-  const { scrollYProgress } = useScroll();
   
-  // Design System Parallax
-  const yShift = useTransform(scrollYProgress, [0, 1], [0, -300]);
-
   useLayoutEffect(() => {
     const ctx = gsap.context(() => {
       // Cinematic Marquee
@@ -49,8 +48,8 @@ function Landing() {
       opacity: 1, 
       y: 0,
       transition: { 
-        duration: 1.2, 
-        delay: 1.2, // Intentional delay to let the 3D model be "shown first"
+        duration: 1.0, 
+        delay: 0.3, // Faster appearance for LCP optimization
         ease: [0.22, 1, 0.36, 1] 
       }
     }
@@ -58,15 +57,14 @@ function Landing() {
 
   return (
     <main ref={containerRef} className="bg-[var(--surface)] text-[var(--on-surface)] selection:bg-[var(--primary)] selection:text-white relative">
-      <MouseFollower />
 
       {/* 1. HERO SECTION - The Discovery Hook */}
-      <section className="relative min-h-[90vh] md:min-h-screen flex flex-col justify-center overflow-hidden">
-        <Suspense fallback={null}>
+      <section className="relative min-h-screen flex flex-col justify-center overflow-hidden pt-24">
+        <Suspense fallback={<div className="absolute inset-0 bg-[var(--surface-container-highest)]/5 animate-pulse" />}>
           <HeroScene />
         </Suspense>
         
-        <div className="container-editorial relative z-10 pt-24">
+        <div className="container-editorial relative z-10 pt-0">
           <motion.div 
             initial="hidden"
             animate="visible"
@@ -143,11 +141,13 @@ function Landing() {
                </div>
             </header>
 
-            <Suspense fallback={null}>
+            <Suspense fallback={<BentoSkeleton />}>
                <BentoGrid />
             </Suspense>
 
-            <Stats />
+            <Suspense fallback={<SectionSkeleton height="h-64" />}>
+               <Stats />
+            </Suspense>
          </div>
       </section>
 
@@ -158,7 +158,16 @@ function Landing() {
                <div className="reveal">
                   <p className="label-md text-[var(--primary)] mb-8 md:mb-12 uppercase tracking-[0.5em]">Specialties</p>
                   <h2 className="display-lg text-4xl md:text-5xl lg:text-7xl mb-12 md:mb-20 uppercase font-black leading-[0.9]">
-                    The <br/> Sommelier's <br/> <span className="text-[var(--primary)] text-outline-primary whitespace-nowrap">Collection</span>
+                    The <br/> 
+                    <span className="group relative">
+                      Sommelier's
+                      <span className="absolute bottom-full left-0 mb-4 px-6 py-3 bg-[var(--on-surface)] text-[var(--surface)] text-xs md:text-sm rounded-xl opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 pointer-events-none normal-case font-normal whitespace-pre-wrap w-64 z-[100] tracking-normal shadow-2xl">
+                        A metaphor for an expert curator with a refined 'palate' for digital motion, aesthetics, and rhythm.
+                        <span className="absolute top-full left-8 border-8 border-transparent border-t-[var(--on-surface)]" />
+                      </span>
+                    </span>
+                    <br/> 
+                    <span className="text-[var(--primary)] text-outline-primary whitespace-nowrap">Collection</span>
                   </h2>
                   
                   <div className="space-y-0">
@@ -210,12 +219,12 @@ function Landing() {
       </section>
 
       {/* 4. ABOUT / AUTHORITY - Skills & Testimonials */}
-      <Suspense fallback={null}>
+      <Suspense fallback={<SectionSkeleton height="h-[60vh]" />}>
         <SkillsSection />
       </Suspense>
       
       <div className="bg-[var(--surface-container-low)] py-24 md:py-40 rounded-[3rem] md:rounded-[5rem] overflow-hidden">
-        <Suspense fallback={null}>
+        <Suspense fallback={<SectionSkeleton height="h-[40vh]" />}>
           <Testimonials />
         </Suspense>
       </div>
@@ -249,12 +258,12 @@ function Landing() {
          </div>
       </section>
 
-      <Suspense fallback={null}>
+      <Suspense fallback={<SectionSkeleton height="h-[30vh]" />}>
         <Newsletter />
       </Suspense>
       
       <div className="mt-24 md:mt-40">
-        <Suspense fallback={null}>
+        <Suspense fallback={<div className="h-64" />}>
           <Footer />
         </Suspense>
       </div>

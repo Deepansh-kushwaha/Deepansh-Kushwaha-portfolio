@@ -85,18 +85,29 @@ export default function SkillsSection() {
                 </span>
               </div>
 
-              {/* Title and Description */}
-              <div className="flex-1 max-w-2xl">
+              {/* Title and Description - Higher Z to stay above image */}
+              <div className="flex-1 max-w-2xl relative z-20">
                 <h3 className="headline-lg text-3xl md:text-5xl tracking-normal mb-6 group-hover:translate-x-4 transition-transform duration-700 ease-[0.76,0,0.24,1]">
                   {cat.title}
                 </h3>
                 <p className="body-lg opacity-40 group-hover:opacity-80 transition-opacity duration-700 max-w-md">
-                  {cat.description}
+                  {cat.title === "Design & Soul" ? (
+                    <>
+                      Curation and aesthetics derived from the North Star of the 'Fluid {' '}
+                      <span className="group/tip relative border-b border-dotted border-[var(--primary)] text-[var(--on-surface)] cursor-help">
+                        Sommelier
+                        <span className="absolute bottom-full left-1/2 -translate-x-1/2 mb-4 px-6 py-3 bg-[var(--on-surface)] text-[var(--surface)] text-sm rounded-xl opacity-0 translate-y-2 group-hover/tip:opacity-100 group-hover/tip:translate-y-0 transition-all duration-300 pointer-events-none normal-case font-normal whitespace-pre-wrap w-64 z-[100] tracking-normal shadow-2xl">
+                          An expert curator specializing in the "palate" of digital experiences.
+                          <span className="absolute top-full left-1/2 -translate-x-1/2 border-8 border-transparent border-t-[var(--on-surface)]" />
+                        </span>
+                      </span>'.
+                    </>
+                  ) : cat.description}
                 </p>
               </div>
 
-              {/* Skills Tags with Magnetic effect */}
-              <div className="flex flex-wrap gap-3 lg:max-w-md lg:justify-end">
+              {/* Skills Tags with Magnetic effect - Higher Z to stay above image */}
+              <div className="flex flex-wrap gap-3 lg:max-w-md lg:justify-end relative z-20">
                 {cat.skills.map((skill, skIndex) => (
                   <Magnetic key={skIndex} strength={0.2}>
                     <span 
@@ -108,12 +119,10 @@ export default function SkillsSection() {
                 ))}
               </div>
 
-              {/* Floating Image Preview on Desktop */}
+              {/* Floating Image Preview on Desktop - Lower Z to stay behind text */}
               <motion.div 
-                className="absolute right-[20%] top-1/2 -translate-y-1/2 w-64 aspect-[3/4] rounded-2xl overflow-hidden pointer-events-none opacity-0 group-hover:opacity-100 hidden lg:block z-50 soft-shadow"
+                className="absolute right-[10%] top-1/2 -translate-y-1/2 w-64 aspect-[3/4] rounded-2xl overflow-hidden pointer-events-none opacity-0 group-hover:opacity-100 hidden lg:block z-10 soft-shadow"
                 initial={{ scale: 0.8, rotate: -10, x: 50 }}
-                whileHover={{ scale: 1, rotate: 5, x: 0 }}
-                transition={{ duration: 0.6, ease: "easeOut" }}
                 style={{ 
                   transform: `scale(${hoveredIndex === i ? 1 : 0.8}) rotate(${hoveredIndex === i ? 5 : -10}deg)`,
                   opacity: hoveredIndex === i ? 1 : 0,

@@ -27,13 +27,25 @@ const Skeleton: React.FC<SkeletonProps> = ({ className = '', variant = 'rect' })
 };
 
 export const HeroSkeleton = () => (
-  <div className="container-editorial min-h-screen flex flex-col justify-center pt-32">
+  <div className="container-editorial min-h-screen flex flex-col justify-center pt-24">
     <Skeleton className="h-6 w-48 mb-12" />
-    <Skeleton className="h-40 w-full mb-16" />
-    <div className="flex justify-between items-end">
-      <Skeleton className="h-24 w-1/3" />
-      <Skeleton className="h-16 w-1/4 rounded-full" />
+    <Skeleton className="h-[18rem] md:h-[22rem] w-full mb-16" /> {/* Updated height to match multi-line display text */}
+    <div className="flex flex-col md:flex-row justify-between items-center md:items-end gap-8">
+      <Skeleton className="h-24 w-full md:w-1/3" />
+      <Skeleton className="h-16 w-48 rounded-full" />
     </div>
+  </div>
+);
+
+export const BentoSkeleton = () => (
+  <div className="w-full h-[80vh] md:h-[100vh] bg-[var(--surface-container-low)] rounded-[3rem] md:rounded-[5rem] overflow-hidden flex items-center justify-center">
+    <Skeleton className="w-[80%] h-[60%] opacity-20" />
+  </div>
+);
+
+export const SectionSkeleton = ({ height = "h-96" }: { height?: string }) => (
+  <div className={`container-editorial py-24 md:py-40`}>
+    <Skeleton className={`${height} w-full rounded-[3rem] md:rounded-[5rem]`} />
   </div>
 );
 

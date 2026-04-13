@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence, type Variants } from 'framer-motion';
 
 const words = ["Innovation", "Precision", "Fluidity", "Architecture", "Studio"];
 
@@ -7,30 +7,32 @@ const PreLoader = ({ finishLoading }: { finishLoading: () => void }) => {
   const [index, setIndex] = useState(0);
 
   useEffect(() => {
-    // Session-based Skip: For developer convenience & returning users
+    // Session-based Skip: Temporarily disabled to allow seeing it on refresh
+    /*
     const hasSeenLoader = sessionStorage.getItem('preloader_seen');
     if (hasSeenLoader) {
       finishLoading();
       return;
     }
+    */
 
     if (index === words.length - 1) {
       setTimeout(() => {
         sessionStorage.setItem('preloader_seen', 'true');
         finishLoading();
-      }, 600); // Shorter exit pause
+      }, 700); // reduced from 1000
       return;
     }
 
     const timeout = setTimeout(() => {
       setIndex(index + 1);
-    }, index === 0 ? 400 : 100); // Accelerated rhythm
+    }, index === 0 ? 800 : 180); // reduced from 1000/250
 
     return () => clearTimeout(timeout);
   }, [index, finishLoading]);
 
   // Framer Motion variants for the staggered stairs - High-End "Liquid" easing
-  const stairVariants = {
+  const stairVariants: Variants = {
     initial: {
       top: 0,
     },
@@ -70,7 +72,7 @@ const PreLoader = ({ finishLoading }: { finishLoading: () => void }) => {
         {[...Array(5)].map((_, i) => (
           <motion.div
             key={i}
-            variants={stairVariants as any}
+            variants={stairVariants}
             initial="initial"
             exit="exit"
             custom={i}
