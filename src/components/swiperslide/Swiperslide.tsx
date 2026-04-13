@@ -1,9 +1,5 @@
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, EffectCoverflow, Pagination } from "swiper/modules";
-import cuberto from '../../assets/cuberto.png'
-import cyber from '../../assets/cyberpunk.png'
-import tracker from '../../assets/tracker.png'
-import pass from '../../assets/pass.png'
 import './Swiperslide.css'
 import { Link } from "react-router";
 
@@ -39,28 +35,28 @@ function Swiperslide() {
         className="mySwiper"
       >
         <SwiperSlide >
-         <Link to="/projects">
-          <img src={cuberto} />
+         <Link to="/catalogue">
+          <img src="https://ik.imagekit.io/ouw0qwets/portfolio/Jewellery3.webp" />
          </Link>
         </SwiperSlide>
         <SwiperSlide>
-          <Link to={"/projects"}>
-          <img src={cyber} />
+          <Link to={"/catalogue"}>
+          <img src="https://ik.imagekit.io/ouw0qwets/portfolio/real%20estate.webp" />
           </Link>
         </SwiperSlide>
         <SwiperSlide >
-         <Link to="/projects">
-          <img src={pass} />
+         <Link to="/catalogue">
+          <img src="https://ik.imagekit.io/ouw0qwets/portfolio/original-cb28cbd4789e886882400836504f2167.webp" />
          </Link>
         </SwiperSlide>
         <SwiperSlide>
-          <Link to="/projects">
-          <img src={tracker} />
+          <Link to="/catalogue">
+          <img src="https://ik.imagekit.io/ouw0qwets/portfolio/original-d472901372d30e98e15715b51b7df917.webp" />
           </Link>
         </SwiperSlide>
         <SwiperSlide>
-          <Link to="/projects">
-          <img src={cyber} />
+          <Link to="/catalogue">
+          <img src="https://ik.imagekit.io/ouw0qwets/portfolio/6ea1b082c49046484e848a49cf03d001.webp?updatedAt=1776085229057" />
           </Link>
         </SwiperSlide>
       </Swiper>

@@ -6,7 +6,7 @@ interface MagneticProps {
   children: React.ReactNode;
 }
 
-const Magnetic: React.FC<MagneticProps> = ({ children, strength = 0.3 }) => {
+const Magnetic: React.FC<MagneticProps> = React.memo(({ children, strength = 0.3 }) => {
   const wrapperRef = useRef<HTMLDivElement>(null);
 
   // Motion values for x & y movement
@@ -45,6 +45,6 @@ const Magnetic: React.FC<MagneticProps> = ({ children, strength = 0.3 }) => {
       {children}
     </motion.div>
   );
-};
+});
 
 export default Magnetic;

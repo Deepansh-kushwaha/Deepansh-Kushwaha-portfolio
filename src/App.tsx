@@ -1,17 +1,23 @@
-import { useState } from "react";
-import "./App.css";
+import { useState, lazy, Suspense } from "react";
 import { Routes, Route, useLocation } from "react-router";
-import Home from "./pages/Home/Home";
+import { AnimatePresence } from "framer-motion";
+import "./App.css";
+
+// Components
 import Navbar from "./components/Navbar";
-import About from "./pages/About";
-import Contact from "./pages/Contact";
-import Projects from "./pages/Projects/Projects";
-import Forbidden from "./pages/Forbidden";
-import Certification from "./pages/Certification";
-import Landing from "./pages/Landing/Landing";
 import PreLoader from "./components/PreLoader";
 import SmoothScroll from "./components/SmoothScroll";
-import { AnimatePresence } from "framer-motion";
+import { HeroSkeleton, CatalogueSkeleton } from "./components/Skeleton";
+
+// Optimized: Route-based Code Splitting
+const Home = lazy(() => import("./pages/Home/Home"));
+const Projects = lazy(() => import("./pages/Projects/Projects"));
+const About = lazy(() => import("./pages/About"));
+const Contact = lazy(() => import("./pages/Contact"));
+const Landing = lazy(() => import("./pages/Landing/Landing"));
+const Catalogue = lazy(() => import("./pages/Catalogue/Catalogue"));
+const Forbidden = lazy(() => import("./pages/Forbidden"));
+const Certification = lazy(() => import("./pages/Certification"));
 
 function App() {
   const [isLoading, setIsLoading] = useState(true);
@@ -29,19 +35,20 @@ function App() {
       {!isLoading && (
         <SmoothScroll>
           {showNavbar || <Navbar />}
-          <Routes location={location} key={location.pathname}>
-
-            <Route path="/" element={<Landing />} />
-            <Route path="/home" element={<Home />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/contact" element={<Contact />} />
-            <Route path="/projects" element={<Projects />} />
-            <Route path="/login" element={<Home />} />
-            <Route path="/certification" element={<Certification />} />
-            <Route path={import.meta.env.BASE_URL + "/*"} element={<Forbidden />} />
-          </Routes>
-          </SmoothScroll>
-
+          <main className="relative">
+              <Routes location={location} key={location.pathname}>
+                <Route path="/" element={<Suspense fallback={<HeroSkeleton />}><Landing /></Suspense>} />
+                <Route path="/home" element={<Suspense fallback={<HeroSkeleton />}><Home /></Suspense>} />
+                <Route path="/about" element={<Suspense fallback={<HeroSkeleton />}><About /></Suspense>} />
+                <Route path="/contact" element={<Suspense fallback={<HeroSkeleton />}><Contact /></Suspense>} />
+                <Route path="/projects" element={<Suspense fallback={<CatalogueSkeleton />}><Projects /></Suspense>} />
+                <Route path="/catalogue" element={<Suspense fallback={<CatalogueSkeleton />}><Catalogue /></Suspense>} />
+                <Route path="/login" element={<Suspense fallback={<HeroSkeleton />}><Home /></Suspense>} />
+                <Route path="/certification" element={<Suspense fallback={<HeroSkeleton />}><Certification /></Suspense>} />
+                <Route path={import.meta.env.BASE_URL + "/*"} element={<Suspense fallback={<HeroSkeleton />}><Forbidden /></Suspense>} />
+              </Routes>
+          </main>
+        </SmoothScroll>
       )}
     </>
   );

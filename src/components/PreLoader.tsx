@@ -7,16 +7,24 @@ const PreLoader = ({ finishLoading }: { finishLoading: () => void }) => {
   const [index, setIndex] = useState(0);
 
   useEffect(() => {
+    // Session-based Skip: For developer convenience & returning users
+    const hasSeenLoader = sessionStorage.getItem('preloader_seen');
+    if (hasSeenLoader) {
+      finishLoading();
+      return;
+    }
+
     if (index === words.length - 1) {
       setTimeout(() => {
+        sessionStorage.setItem('preloader_seen', 'true');
         finishLoading();
-      }, 1000);
+      }, 600); // Shorter exit pause
       return;
     }
 
     const timeout = setTimeout(() => {
       setIndex(index + 1);
-    }, index === 0 ? 1200 : 180); // Slightly adjusted timing for better rhythm
+    }, index === 0 ? 400 : 100); // Accelerated rhythm
 
     return () => clearTimeout(timeout);
   }, [index, finishLoading]);
