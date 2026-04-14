@@ -13,7 +13,7 @@ function Contact() {
 
   useLayoutEffect(() => {
     const ctx = gsap.context(() => {
-      const sections = gsap.utils.toArray<HTMLElement>(".snap-section");
+      // const sections = gsap.utils.toArray<HTMLElement>(".snap-section");
       
       const st = ScrollTrigger.create({
         trigger: containerRef.current,
@@ -73,13 +73,13 @@ function Contact() {
             
             <div className="shrink-0 flex flex-col items-center gap-4">
               <a 
-                href="https://calendly.com" 
+                href="https://wa.me/918882364435?text=book%20a%20call%20for%20me" 
                 target="_blank" 
                 rel="noopener noreferrer"
                 onClick={() => triggerHaptic('medium')}
                 className="btn-primary px-12 py-5 text-xl group whitespace-nowrap shadow-xl shadow-red-900/10"
               >
-                BOOK 15 MIN <i className="ri-calendar-check-line ml-3 group-hover:rotate-12 transition-transform" />
+                BOOK 15 MIN <i className="ri-whatsapp-line ml-3 group-hover:rotate-12 transition-transform" />
               </a>
               <span className="label-sm opacity-20 text-[10px] uppercase tracking-[0.2em] font-bold italic">Available 10AM - 6PM GMT</span>
             </div>

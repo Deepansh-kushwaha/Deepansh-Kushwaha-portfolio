@@ -28,7 +28,7 @@ function Navbar() {
     { name: "Services", path: "/services" },
     { name: "Catalogue", path: "/catalogue" },
     { name: "Projects", path: "/projects" },
-    { name: "About", path: "/about" },
+    { name: "Studio", path: "/studio" },
   ]
   
   const handleNavInteraction = () => triggerHaptic('light');

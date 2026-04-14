@@ -35,17 +35,30 @@ function Catalogue() {
           </div>
         </header>
 
+        {/* Scroll Indicator */}
+        <div className="mb-24 md:mb-32">
+          <button 
+            onClick={() => (window as any).lenis?.scrollTo('#works')}
+            className="group flex flex-col items-start gap-4 opacity-30 hover:opacity-100 transition-opacity"
+          >
+            <span className="label-md uppercase tracking-[0.4em] text-[10px]">THE ARCHIVE</span>
+            <div className="w-[1px] h-20 bg-[var(--on-surface)] relative overflow-hidden ml-2">
+                <div className="absolute top-0 left-0 w-full h-full bg-[var(--primary)] -translate-y-full group-hover:translate-y-0 transition-transform duration-700"></div>
+            </div>
+            <i className="ri-arrow-down-line text-2xl group-hover:translate-y-2 transition-transform duration-500"></i>
+          </button>
+        </div>
+
         {/* Filter System - Animated Tags */}
-        <section className="mb-24 flex flex-wrap gap-3 reveal stagger-2">
+        <section id="works" className="mb-24 flex flex-wrap gap-3 reveal stagger-2">
           {categories.map((cat) => (
             <button
               key={cat}
               onClick={() => { setActiveFilter(cat); triggerHaptic('light'); }}
-              className={`label-md px-8 md:px-10 py-3 md:py-4 rounded-full transition-all duration-500 relative group overflow-hidden text-[10px] md:text-xs tracking-widest font-bold ${
-                activeFilter === cat
+              className={`label-md px-8 md:px-10 py-3 md:py-4 rounded-full transition-all duration-500 relative group overflow-hidden text-[10px] md:text-xs tracking-widest font-bold ${activeFilter === cat
                   ? "bg-[var(--primary)] text-white shadow-2xl shadow-[var(--primary)]/30"
                   : "bg-[var(--surface-container-high)] text-[var(--on-surface)]/60 hover:text-[var(--on-surface)]"
-              }`}
+                }`}
             >
               <span className="relative z-10">{cat}</span>
               {activeFilter !== cat && (
@@ -82,15 +95,14 @@ function Catalogue() {
                 initial={{ opacity: 0, y: 50 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-100px" }}
-                transition={{ 
-                  duration: 1.2, 
-                  delay: (index % 3) * 0.15, 
-                  ease: [0.22, 1, 0.36, 1] 
+                transition={{
+                  duration: 1.2,
+                  delay: (index % 3) * 0.15,
+                  ease: [0.22, 1, 0.36, 1]
                 }}
-                className={`flex flex-col group cursor-pointer ${
-                  index % 3 === 1 ? "lg:mt-32" : 
-                  index % 3 === 2 ? "lg:mt-64" : ""
-                }`}
+                className={`flex flex-col group cursor-pointer ${index % 3 === 1 ? "lg:mt-32" :
+                    index % 3 === 2 ? "lg:mt-64" : ""
+                  }`}
                 onClick={() => { triggerHaptic('medium'); navigate(`/catalogue/${work.slug}`); }}
               >
                 {/* Image Container */}
@@ -106,7 +118,7 @@ function Catalogue() {
                       backgroundSize: 'cover'
                     }}
                   />
-                  
+
                   {/* Detailed Overlay on Hover */}
                   <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-all duration-700 backdrop-blur-[2px] p-10 md:p-14 flex flex-col justify-end">
                     <div className="translate-y-10 group-hover:translate-y-0 transition-transform duration-700 flex flex-col gap-6">
@@ -115,7 +127,7 @@ function Catalogue() {
                         <h4 className="text-white text-2xl md:text-4xl font-black uppercase italic leading-none">{work.title}</h4>
                         <p className="body-lg text-white/70 text-sm md:text-lg italic line-clamp-2 md:line-clamp-none">"{work.description}"</p>
                       </div>
-                      
+
                       <div className="flex items-center gap-4 border-t border-white/10 pt-6">
                         <div className="w-10 h-10 rounded-full border border-[var(--primary)] flex items-center justify-center text-[var(--primary)] shrink-0">
                           <i className="ri-line-chart-line text-sm text-white" />
@@ -165,9 +177,14 @@ function Catalogue() {
                   GET A QUOTE <i className="ri-arrow-right-line ml-4 transition-transform group-hover:translate-x-3 text-white"></i>
                 </Link>
               </Magnetic>
-              <Link to="/contact" className="label-md uppercase opacity-30 hover:opacity-100 tracking-[0.4em] transition-all hover:text-[var(--primary)] text-sm whitespace-nowrap">
+              <a 
+                href="https://wa.me/918882364435?text=book%20a%20call%20for%20me"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="label-md uppercase opacity-30 hover:opacity-100 tracking-[0.4em] transition-all hover:text-[var(--primary)] text-sm whitespace-nowrap"
+              >
                 OR BOOK A CALL / 15 MIN
-              </Link>
+              </a>
             </div>
           </div>
         </section>

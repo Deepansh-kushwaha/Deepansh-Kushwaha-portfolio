@@ -20,6 +20,7 @@ const Contact = lazy(() => import("./pages/Contact"));
 const Landing = lazy(() => import("./pages/Landing/Landing"));
 const Catalogue = lazy(() => import("./pages/Catalogue/Catalogue"));
 const CaseStudy = lazy(() => import("./pages/Catalogue/CaseStudy"));
+const Studio = lazy(() => import("./pages/Studio"));
 const Forbidden = lazy(() => import("./pages/Forbidden"));
 const Certification = lazy(() => import("./pages/Certification"));
 const Services = lazy(() => import("./pages/Services/Services"));
@@ -48,6 +49,7 @@ function App() {
                 <Route path="/" element={<PageTransition><Suspense fallback={<HeroSkeleton />}><Landing /></Suspense></PageTransition>} />
                 <Route path="/home" element={<PageTransition><Suspense fallback={<HeroSkeleton />}><Home /></Suspense></PageTransition>} />
                 <Route path="/about" element={<PageTransition><Suspense fallback={<HeroSkeleton />}><About /></Suspense></PageTransition>} />
+                <Route path="/studio" element={<PageTransition><Suspense fallback={<HeroSkeleton />}><Studio /></Suspense></PageTransition>} />
                 <Route path="/contact" element={<PageTransition><Suspense fallback={<HeroSkeleton />}><Contact /></Suspense></PageTransition>} />
                 <Route path="/projects" element={<PageTransition><Suspense fallback={<CatalogueSkeleton />}><Projects /></Suspense></PageTransition>} />
                 <Route path="/projects/:id" element={<PageTransition><Suspense fallback={<CatalogueSkeleton />}><CaseStudy /></Suspense></PageTransition>} />

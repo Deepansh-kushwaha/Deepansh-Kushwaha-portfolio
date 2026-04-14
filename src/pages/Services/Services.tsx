@@ -44,10 +44,23 @@ export default function Services() {
           <p className="body-lg text-2xl md:text-3xl opacity-50 max-w-2xl reveal stagger-2">
             A curated collection of strategic interventions designed to elevate brands through engineering excellence and editorial curation.
           </p>
+
+          <div className="mt-24 md:mt-32">
+             <button 
+               onClick={() => (window as any).lenis?.scrollTo('#capabilities')}
+               className="group flex flex-col items-start gap-4 opacity-30 hover:opacity-100 transition-opacity"
+             >
+                <span className="label-md uppercase tracking-[0.4em] text-[10px]">THE CAPABILITIES</span>
+                <div className="w-[1px] h-20 bg-[var(--on-surface)] relative overflow-hidden ml-2">
+                   <div className="absolute top-0 left-0 w-full h-full bg-[var(--primary)] -translate-y-full group-hover:translate-y-0 transition-transform duration-700"></div>
+                </div>
+                <i className="ri-arrow-down-line text-2xl group-hover:translate-y-2 transition-transform duration-500"></i>
+             </button>
+           </div>
         </header>
 
         {/* Services List - Asymmetric Editorial Layout */}
-        <div className="space-y-40 md:space-y-80">
+        <div id="capabilities" className="space-y-40 md:space-y-80">
           {services.map((service, index) => (
             <section 
               key={service.id} 
