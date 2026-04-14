@@ -8,6 +8,8 @@ import Navbar from "./components/Navbar";
 import PreLoader from "./components/PreLoader";
 import SmoothScroll from "./components/SmoothScroll";
 import MouseFollower from "./components/MouseFollower";
+import PageTransition from "./components/PageTransition";
+import ScrollToTop from "./components/ScrollToTop";
 import { HeroSkeleton, CatalogueSkeleton } from "./components/Skeleton";
 
 // Optimized: Route-based Code Splitting
@@ -28,6 +30,8 @@ function App() {
 
   return (
     <>
+      <ScrollToTop />
+      
       <AnimatePresence mode="wait">
         {isLoading && (
           <PreLoader key="loader" finishLoading={() => setIsLoading(false)} />
@@ -38,18 +42,20 @@ function App() {
         <MouseFollower />
         <SmoothScroll>
             {showNavbar || <Navbar />}
-            <Routes location={location} key={location.pathname}>
-              <Route path="/" element={<Suspense fallback={<HeroSkeleton />}><Landing /></Suspense>} />
-              <Route path="/home" element={<Suspense fallback={<HeroSkeleton />}><Home /></Suspense>} />
-              <Route path="/about" element={<Suspense fallback={<HeroSkeleton />}><About /></Suspense>} />
-              <Route path="/contact" element={<Suspense fallback={<HeroSkeleton />}><Contact /></Suspense>} />
-              <Route path="/projects" element={<Suspense fallback={<CatalogueSkeleton />}><Projects /></Suspense>} />
-              <Route path="/catalogue" element={<Suspense fallback={<CatalogueSkeleton />}><Catalogue /></Suspense>} />
-              <Route path="/login" element={<Suspense fallback={<HeroSkeleton />}><Home /></Suspense>} />
-              <Route path="/certification" element={<Suspense fallback={<HeroSkeleton />}><Certification /></Suspense>} />
-              <Route path="/services" element={<Suspense fallback={<HeroSkeleton />}><Services /></Suspense>} />
-              <Route path={import.meta.env.BASE_URL + "/*"} element={<Suspense fallback={<HeroSkeleton />}><Forbidden /></Suspense>} />
-            </Routes>
+            <AnimatePresence mode="wait">
+              <Routes location={location} key={location.pathname}>
+                <Route path="/" element={<PageTransition><Suspense fallback={<HeroSkeleton />}><Landing /></Suspense></PageTransition>} />
+                <Route path="/home" element={<PageTransition><Suspense fallback={<HeroSkeleton />}><Home /></Suspense></PageTransition>} />
+                <Route path="/about" element={<PageTransition><Suspense fallback={<HeroSkeleton />}><About /></Suspense></PageTransition>} />
+                <Route path="/contact" element={<PageTransition><Suspense fallback={<HeroSkeleton />}><Contact /></Suspense></PageTransition>} />
+                <Route path="/projects" element={<PageTransition><Suspense fallback={<CatalogueSkeleton />}><Projects /></Suspense></PageTransition>} />
+                <Route path="/catalogue" element={<PageTransition><Suspense fallback={<CatalogueSkeleton />}><Catalogue /></Suspense></PageTransition>} />
+                <Route path="/login" element={<PageTransition><Suspense fallback={<HeroSkeleton />}><Home /></Suspense></PageTransition>} />
+                <Route path="/certification" element={<PageTransition><Suspense fallback={<HeroSkeleton />}><Certification /></Suspense></PageTransition>} />
+                <Route path="/services" element={<PageTransition><Suspense fallback={<HeroSkeleton />}><Services /></Suspense></PageTransition>} />
+                <Route path={import.meta.env.BASE_URL + "/*"} element={<PageTransition><Suspense fallback={<HeroSkeleton />}><Forbidden /></Suspense></PageTransition>} />
+              </Routes>
+            </AnimatePresence>
         </SmoothScroll>
       </main>
     </>

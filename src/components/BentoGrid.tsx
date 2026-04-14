@@ -14,30 +14,39 @@ const images: ImageItem[] = [
   { url: "https://ik.imagekit.io/ouw0qwets/portfolio/original-d472901372d30e98e15715b51b7df917.webp", title: "Kinetic Flow", category: "Creative 3D" },
   { url: "https://ik.imagekit.io/ouw0qwets/portfolio/6ea1b082c49046484e848a49cf03d001.webp?updatedAt=1776085229057", title: "Aetherial", category: "Art Direction" },
   { url: "https://ik.imagekit.io/ouw0qwets/portfolio/Jewellery3.webp", title: "Minimalism", category: "Branding" },
+  { url: "https://images.unsplash.com/photo-1614850523296-d8c1af93d400?q=80&w=1000&auto=format&fit=crop", title: "Prism", category: "Shaders" },
+  { url: "https://images.unsplash.com/photo-1634017839464-5c339ebe3cb4?q=80&w=1000&auto=format&fit=crop", title: "Vortex", category: "VFX" },
+  { url: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=1000&auto=format&fit=crop", title: "Fluidity", category: "UI/UX" },
+  { url: "https://images.unsplash.com/photo-1550684848-fac1c5b4e853?q=80&w=1000&auto=format&fit=crop", title: "Deep Mind", category: "AI Content" },
 ];
 
 export default function BentoGrid() {
   return (
-    <div className="relative w-full h-[80vh] md:h-[100vh] overflow-hidden py-12 mb-32 bg-[var(--surface-container-low)]">
-      {/* Tilted Container */}
+    <div className="relative w-full h-[85vh] sm:h-[100vh] lg:h-[120vh] overflow-hidden py-12 mb-32 bg-[var(--surface-container-low)]">
+      {/* Tilted Container - More extreme tilt and depth for Mobile Impact */}
       <div 
-        className="absolute inset-[-20%] rotate-[-12deg] flex justify-center items-center gap-6 md:gap-12"
-        style={{ perspective: "1000px" }}
+        className="absolute inset-[-40%] sm:inset-[-30%] rotate-[-12deg] sm:rotate-[-8deg] flex justify-center items-center gap-3 sm:gap-8"
+        style={{ perspective: "2000px" }}
       >
         
-        {/* Column 1 - Moving Down */}
-        <div className="flex-1 flex flex-col gap-6 md:gap-12">
-          <ScrollingColumn items={[images[0], images[1], images[2]]} duration={30} reverse={false} />
+        {/* Column 1 - Down (Faster for mobile energy) */}
+        <div className="flex-1 flex flex-col gap-3 sm:gap-6">
+          <ScrollingColumn items={[images[0], images[1], images[2], images[3], images[4]]} duration={30} reverse={false} />
         </div>
 
-        {/* Column 2 - Moving Up */}
-        <div className="flex-1 flex flex-col gap-6 md:gap-12">
-          <ScrollingColumn items={[images[3], images[4], images[5]]} duration={40} reverse={true} />
+        {/* Column 2 - Up (Varying speeds) */}
+        <div className="flex-1 flex flex-col gap-3 sm:gap-6">
+          <ScrollingColumn items={[images[5], images[6], images[7], images[8], images[9]]} duration={45} reverse={true} />
         </div>
 
-        {/* Column 3 - Moving Down faster */}
-        <div className="flex-1 flex flex-col gap-6 md:gap-12 hidden lg:flex">
-          <ScrollingColumn items={[images[1], images[3], images[0]]} duration={35} reverse={false} />
+        {/* Column 3 - Down (Visible earlier) */}
+        <div className="flex-1 flex flex-col gap-3 sm:gap-6 hidden sm:flex">
+          <ScrollingColumn items={[images[2], images[4], images[6], images[0], images[3]]} duration={35} reverse={false} />
+        </div>
+
+        {/* Column 4 - Up (Desktop Only) */}
+        <div className="flex-1 flex flex-col gap-3 sm:gap-6 hidden xl:flex">
+          <ScrollingColumn items={[images[1], images[9], images[5], images[7], images[8]]} duration={50} reverse={true} />
         </div>
 
       </div>
@@ -68,7 +77,7 @@ function ScrollingColumn({ items, duration, reverse }: { items: ImageItem[], dur
       {[...items, ...items].map((image, idx) => (
         <div key={idx} className="relative group overflow-hidden rounded-[2rem] md:rounded-[3.5rem] bg-[var(--surface-container-high)] aspect-[3/4] w-full">
           <img
-            src={getIKUrl(image.url, { width: 400, quality: 80, format: 'auto' })}
+            src={getIKUrl(image.url, { width: 300, quality: 100, format: 'auto' })}
             alt={image.title}
             loading="lazy"
             decoding="async"

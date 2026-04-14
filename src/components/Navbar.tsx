@@ -2,6 +2,7 @@ import { useState, useEffect } from "react"
 import { Link, useLocation } from "react-router"
 import { motion, AnimatePresence } from "framer-motion"
 import Magnetic from "./Magnetic"
+import { triggerHaptic } from "../utils/haptics"
 
 function Navbar() {
   const [isOpen, setIsOpen] = useState(false)
@@ -29,6 +30,8 @@ function Navbar() {
     { name: "Projects", path: "/projects" },
     { name: "About", path: "/about" },
   ]
+  
+  const handleNavInteraction = () => triggerHaptic('light');
 
   return (
     <nav className={`fixed top-0 left-0 right-0 z-[100] transition-all duration-700 ${
@@ -36,7 +39,7 @@ function Navbar() {
     }`}>
       <div className="container-editorial flex justify-between items-center">
         {/* Logo */}
-        <Link to="/" className="relative z-[110] group">
+        <Link to="/" className="relative z-[110] group" onClick={handleNavInteraction}>
           <Magnetic strength={0.1}>
             <div className="flex items-center gap-3">
               <span className="w-8 h-8 rounded-full bg-[var(--primary)] flex items-center justify-center text-white font-bold text-xs ring-0 group-hover:ring-8 ring-[var(--primary)]/10 transition-all duration-500">
@@ -56,7 +59,12 @@ function Navbar() {
           <ul className='flex gap-1 items-center'>
             {menuItems.map((item) => (
               <li key={item.path} className="relative">
-                <Link to={item.path} className={navItemClass(item.path)}>
+                <Link 
+                  to={item.path} 
+                  className={navItemClass(item.path)}
+                  onMouseEnter={handleNavInteraction}
+                  onClick={handleNavInteraction}
+                >
                   {item.name}
                   {location.pathname === item.path && (
                     <motion.div 
@@ -75,6 +83,7 @@ function Navbar() {
           <Magnetic strength={0.2}>
             <Link 
               to="/contact" 
+              onClick={handleNavInteraction}
               className="label-md px-6 py-3 bg-[var(--on-surface)] text-[var(--surface)] hover:bg-[var(--primary)] hover:text-white rounded-full transition-all duration-500 flex items-center gap-2"
             >
               Start Project <i className="ri-arrow-right-up-line"></i>
@@ -85,7 +94,10 @@ function Navbar() {
         {/* Mobile Toggle */}
         <div className="md:hidden relative z-[110]">
           <button 
-            onClick={() => setIsOpen(!isOpen)}
+            onClick={() => {
+              setIsOpen(!isOpen);
+              triggerHaptic('medium');
+            }}
             className={`w-12 h-12 rounded-full flex items-center justify-center transition-all duration-500 ${
               isOpen ? "bg-[var(--on-surface)] text-white rotate-90" : "glass border border-[var(--on-surface)]/10"
             }`}

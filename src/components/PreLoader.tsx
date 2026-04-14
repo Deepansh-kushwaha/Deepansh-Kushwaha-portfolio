@@ -49,7 +49,7 @@ const PreLoader = ({ finishLoading }: { finishLoading: () => void }) => {
   return (
     <motion.div className="fixed inset-0 z-[100] pointer-events-none overflow-hidden">
       {/* 1. The Word Cycling Display */}
-      <AnimatePresence mode="wait">
+       <AnimatePresence mode="wait">
         <motion.div
            key={index}
            initial={{ opacity: 0 }}
@@ -66,6 +66,17 @@ const PreLoader = ({ finishLoading }: { finishLoading: () => void }) => {
            </div>
         </motion.div>
       </AnimatePresence>
+
+      {/* Mobile Hint - High visibility experience note */}
+      <motion.div 
+        initial={{ opacity: 0, y: 10 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.8, duration: 1 }}
+        className="fixed bottom-16 left-1/2 -translate-x-1/2 text-white/80 label-md md:hidden z-[115] whitespace-nowrap flex flex-col items-center gap-3"
+      >
+        <div className="w-8 h-[1px] bg-[var(--primary)] mb-1"></div>
+        <span className="tracking-widest uppercase text-[10px]">Best viewed on desktop</span>
+      </motion.div>
 
       {/* 2. The Combined Stairs Background */}
       <div className="flex w-screen h-screen">

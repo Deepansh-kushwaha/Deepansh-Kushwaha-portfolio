@@ -25,6 +25,7 @@ const SmoothScroll: React.FC<SmoothScrollProps> = ({ children }) => {
     });
 
     lenisRef.current = lenis;
+    (window as any).lenis = lenis;
 
     // 2. Synchronize GSAP ScrollTrigger
     lenis.on('scroll', ScrollTrigger.update);

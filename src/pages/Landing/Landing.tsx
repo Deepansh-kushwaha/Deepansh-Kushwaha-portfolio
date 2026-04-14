@@ -1,10 +1,11 @@
-import { useLayoutEffect, useRef, lazy, Suspense } from 'react';
+import { useLayoutEffect, useRef, lazy, Suspense, useState } from 'react';
 import { Link } from "react-router";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import type { Variants } from "framer-motion";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Magnetic from "../../components/Magnetic";
+import { triggerHaptic } from "../../utils/haptics";
 
 // Lazy Components
 import HeroScene from "../../components/HeroScene";
@@ -22,8 +23,39 @@ const BentoGrid = lazy(() => import("../../components/BentoGrid"));
 gsap.registerPlugin(ScrollTrigger);
 
 function Landing() {
+  const [activeSpecialty, setActiveSpecialty] = useState<number | null>(null);
   const containerRef = useRef(null);
   const marqueeRef = useRef(null);
+
+  const specialties = [
+    { 
+      id: "01", 
+      title: "Interactive Experiences", 
+      desc: "Websites that respond to your touch and movement, making your brand feel alive and premium.",
+      mission: "User Engagement",
+      details: "We build websites that people actually enjoy using. By focusing on smooth animations and natural interactions, we keep your visitors engaged and impressed.",
+      icon: "ri-cursor-line",
+      color: "rgba(184, 20, 0, 0.4)"
+    },
+    { 
+      id: "02", 
+      title: "High-Performance Build", 
+      desc: "Modern engineering that ensures your site loads instantly and works perfectly on every device.",
+      mission: "Rock-Solid Reliability",
+      details: "Your website is your storefront. We use enterprise-grade tools to make sure it never crashes, stays secure, and handles any amount of traffic with ease.",
+      icon: "ri-shield-check-line",
+      color: "rgba(0, 108, 69, 0.4)"
+    },
+    { 
+      id: "03", 
+      title: "Visual Storytelling", 
+      desc: "Stunning 3D visuals and cinematic effects that set you apart from every other generic site.",
+      mission: "Brand Distinction",
+      details: "Don't just list your products—show them. We use cutting-edge 3D technology to create immersive worlds that tell your brand's story in a way nobody forgets.",
+      icon: "ri-magic-line",
+      color: "rgba(108, 69, 0, 0.4)"
+    }
+  ];
   
   useLayoutEffect(() => {
     const ctx = gsap.context(() => {
@@ -95,15 +127,20 @@ function Landing() {
                </motion.p>
 
                <motion.div variants={revealVariants} className="flex justify-center md:justify-end">
-                 <Magnetic strength={0.15}>
-                   <Link 
-                     to="/contact" 
-                     className="btn-primary group text-lg md:text-xl relative overflow-hidden w-full md:w-auto justify-center"
-                   >
-                     <span>Start a Project</span>
-                     <i className="ri-arrow-right-up-line transition-transform group-hover:translate-x-1 group-hover:-translate-y-1"></i>
-                   </Link>
-                 </Magnetic>
+                   <Magnetic strength={0.15}>
+                    <a 
+                      href="#specialties" 
+                      onClick={(e) => {
+                        e.preventDefault();
+                        (window as any).lenis?.scrollTo('#specialties');
+                        triggerHaptic('light');
+                      }}
+                      className="btn-primary group text-lg md:text-xl relative overflow-hidden w-full md:w-auto justify-center"
+                    >
+                      <span>Explore Services</span>
+                      <i className="ri-arrow-right-down-line transition-transform group-hover:translate-y-1"></i>
+                    </a>
+                  </Magnetic>
                </motion.div>
             </div>
           </motion.div>
@@ -152,7 +189,7 @@ function Landing() {
       </section>
 
       {/* 3. SERVICES - The Value Proposition */}
-      <section className="py-32 md:py-64 bg-[var(--surface)] relative z-20">
+      <section id="specialties" className="py-32 md:py-64 bg-[var(--surface)] relative z-20">
          <div className="container-editorial">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-24 lg:items-start">
                <div className="reveal">
@@ -170,27 +207,27 @@ function Landing() {
                     <span className="text-[var(--primary)] text-outline-primary whitespace-nowrap">Collection</span>
                   </h2>
                   
-                  <div className="space-y-0">
-                    {[
-                      { id: "01", title: "Interaction Design", desc: "Fluid motion and tactile digital experiences built on psychology and physics." },
-                      { id: "02", title: "Global Engineering", desc: "Enterprise React architectures that scale infinitely without compromising speed." },
-                      { id: "03", title: "Creative WebGL", desc: "Pushing the browser to its limits with custom shaders and 3D environments." }
-                    ].map((s, i) => (
+                  <div className="space-y-0" onMouseLeave={() => setActiveSpecialty(null)}>
+                    {specialties.map((s, i) => (
                       <motion.div 
                         key={i} 
                         initial={{ opacity: 0, x: -20 }}
                         whileInView={{ opacity: 1, x: 0 }}
                         viewport={{ once: true }}
-                        className="group py-12 border-b border-[var(--on-surface)]/10 hover:pr-8 transition-all cursor-crosshair flex justify-between items-center"
+                        onMouseEnter={() => {
+                          setActiveSpecialty(i);
+                          triggerHaptic('light');
+                        }}
+                        className={`group py-12 border-b border-[var(--on-surface)]/10 hover:pr-8 transition-all cursor-crosshair flex justify-between items-center ${activeSpecialty === i ? 'bg-[var(--surface-container-low)]/50 px-4 -mx-4' : ''}`}
                       >
                          <div className="flex gap-8 items-start">
-                            <span className="label-md text-[var(--primary)] group-hover:scale-110 transition-transform">{s.id}</span>
+                            <span className={`label-md transition-all ${activeSpecialty === i ? 'text-[var(--primary)] scale-110' : 'text-[var(--on-surface)]/20'}`}>{s.id}</span>
                             <div className="max-w-md">
-                               <h3 className="headline-lg text-2xl md:text-3xl mb-4 group-hover:text-[var(--primary)] transition-colors">{s.title}</h3>
-                               <p className="body-lg opacity-40 group-hover:opacity-100 transition-opacity">{s.desc}</p>
+                               <h3 className={`headline-lg text-2xl md:text-3xl mb-4 transition-colors ${activeSpecialty === i ? 'text-[var(--primary)]' : ''}`}>{s.title}</h3>
+                               <p className={`body-lg transition-opacity ${activeSpecialty === i ? 'opacity-100' : 'opacity-40 hover:opacity-100'}`}>{s.desc}</p>
                             </div>
                          </div>
-                         <div className="w-12 h-12 rounded-full border border-[var(--on-surface)]/10 flex items-center justify-center group-hover:bg-[var(--primary)] group-hover:text-white transition-all">
+                         <div className={`w-12 h-12 rounded-full border border-[var(--on-surface)]/10 flex items-center justify-center transition-all ${activeSpecialty === i ? 'bg-[var(--primary)] text-white border-transparent rotate-45' : ''}`}>
                             <i className="ri-arrow-right-up-line text-xl"></i>
                          </div>
                       </motion.div>
@@ -199,20 +236,56 @@ function Landing() {
                </div>
 
                <div className="hidden lg:block sticky top-40 aspect-[4/5] bg-[var(--on-surface)] rounded-[4rem] overflow-hidden p-16 flex flex-col justify-end group">
-                  <div className="absolute inset-0 bg-gradient-to-br from-[var(--primary)]/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-1000" />
+                  {/* Dynamic Color Overlay */}
+                  <motion.div 
+                    key={activeSpecialty ?? 'default'}
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ duration: 1 }}
+                    className="absolute inset-0"
+                    style={{ 
+                      backgroundColor: activeSpecialty !== null 
+                        ? specialties[activeSpecialty].color 
+                        : 'rgba(184, 20, 0, 0.1)' 
+                    }}
+                  />
                   <div className="absolute inset-0 dot-grid-svg opacity-10" />
                   
-                  <div className="relative z-10 transition-transform duration-700 group-hover:-translate-y-4">
-                     <p className="label-md text-white/40 mb-4">Studio Mission</p>
-                     <h2 className="display-lg text-3xl md:text-5xl text-white mb-8">
-                       <span className="whitespace-nowrap">Curating</span> The <br /> Future of Web
-                     </h2>
-                     <p className="body-lg text-white/50 max-w-sm">We believe software should feel like high-end furniture: functional, durable, and architecturally beautiful.</p>
-                  </div>
+                  <AnimatePresence mode="wait">
+                    <motion.div 
+                      key={activeSpecialty ?? 'default'}
+                      initial={{ opacity: 0, y: 30 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: -20 }}
+                      transition={{ duration: 0.6, ease: [0.76, 0, 0.24, 1] }}
+                      className="relative z-10"
+                    >
+                       <p className="label-md text-white/40 mb-4 uppercase tracking-widest">
+                        {activeSpecialty !== null ? specialties[activeSpecialty].mission : "Studio Mission"}
+                       </p>
+                       <h2 className="display-lg text-3xl md:text-5xl text-white mb-8">
+                         {activeSpecialty !== null 
+                           ? <>{specialties[activeSpecialty].title.split(' ')[0]} <br /> {specialties[activeSpecialty].title.split(' ')[1]}</>
+                           : <>Curating The <br /> Future of Web</>
+                         }
+                       </h2>
+                       <p className="body-lg text-white/50 max-w-sm">
+                        {activeSpecialty !== null 
+                          ? specialties[activeSpecialty].details 
+                          : "We believe software should feel like high-end furniture: functional, durable, and architecturally beautiful."
+                        }
+                       </p>
+                    </motion.div>
+                  </AnimatePresence>
                   
-                  <div className="absolute top-16 right-16 w-16 h-16 rounded-full border border-white/20 flex items-center justify-center text-white/40">
-                     <i className="ri-command-line text-2xl"></i>
-                  </div>
+                  <motion.div 
+                    key={activeSpecialty !== null ? `icon-${activeSpecialty}` : 'default-icon'}
+                    initial={{ scale: 0.5, opacity: 0 }}
+                    animate={{ scale: 1, opacity: 1 }}
+                    className="absolute top-16 right-16 w-16 h-16 rounded-full border border-white/20 flex items-center justify-center text-white/40"
+                  >
+                     <i className={`${activeSpecialty !== null ? specialties[activeSpecialty].icon : 'ri-command-line'} text-2xl`}></i>
+                  </motion.div>
                </div>
             </div>
          </div>
