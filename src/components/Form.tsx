@@ -70,28 +70,29 @@ function Form() {
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-start">
         
         {/* Left: Branding & Context */}
-        <div className="flex flex-col gap-12">
+        <div className="flex flex-col gap-8 md:gap-12">
           <div className="flex flex-col gap-4">
-            <p className="label-md text-[var(--primary)] uppercase tracking-[0.5em]">The Brief</p>
-            <h2 className="display-lg text-5xl md:text-7xl uppercase leading-[0.9] font-black italic text-[var(--on-surface)]">
-              LET'S CREATE <br /> <span className="text-outline-primary">SOMETHING</span> <br /> UNREAL
+            <p className="label-md text-[var(--primary)] uppercase tracking-[0.5em] text-xs md:text-sm">Project Initiation</p>
+            <h2 className="display-lg text-4xl sm:text-5xl md:text-6xl lg:text-7xl uppercase leading-[0.85] font-black italic text-[var(--on-surface)] break-words">
+              START YOUR <br /> <span className="text-outline-primary">PROJECT BRIEF</span>
             </h2>
           </div>
           
           <div className="flex flex-col gap-6">
-            <p className="body-lg max-w-sm text-[var(--on-surface)] opacity-60">We are currently taking on select projects for the current fiscal quarter.</p>
-            <div className="flex gap-4">
-              <a href="#" className="label-sm text-[var(--on-surface)] hover:text-[var(--primary)] transition-colors underline opacity-60 hover:opacity-100">IG</a>
-              <a href="#" className="label-sm text-[var(--on-surface)] hover:text-[var(--primary)] transition-colors underline opacity-60 hover:opacity-100">TW</a>
-              <a href="#" className="label-sm text-[var(--on-surface)] hover:text-[var(--primary)] transition-colors underline opacity-60 hover:opacity-100">LI</a>
+            <p className="body-lg max-w-sm text-[var(--on-surface)] opacity-60 text-sm md:text-lg">
+              Submit your project details to receive a personalized strategic proposal within 24 business hours. We review each brief with surgical precision.
+            </p>
+            <div className="flex gap-6">
+              <a href="#" className="label-sm text-[var(--on-surface)] hover:text-[var(--primary)] transition-colors underline opacity-60 hover:opacity-100 uppercase tracking-widest text-[10px]">Instagram</a>
+              <a href="#" className="label-sm text-[var(--on-surface)] hover:text-[var(--primary)] transition-colors underline opacity-60 hover:opacity-100 uppercase tracking-widest text-[10px]">LinkedIn</a>
             </div>
           </div>
         </div>
 
         {/* Right: The Form */}
-        <form onSubmit={handleSubmit} className="flex flex-col gap-12">
+        <form onSubmit={handleSubmit} className="flex flex-col gap-10 md:gap-16">
           
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12">
             <motion.div className="relative">
               <input 
                 type="text"
@@ -101,7 +102,7 @@ function Form() {
                 onBlur={() => setFocusedField(null)}
                 value={formData.fullName}
                 onChange={(e) => setFormData({ ...formData, fullName: e.target.value })}
-                className="w-full bg-transparent border-b border-[var(--on-surface)]/20 py-6 text-xl outline-none focus:border-[var(--primary)] transition-all placeholder:text-[var(--on-surface)] placeholder:opacity-40 text-[var(--on-surface)] uppercase tracking-widest font-normal"
+                className="w-full bg-transparent border-b border-[var(--on-surface)]/20 py-4 md:py-6 text-lg md:text-xl outline-none focus:border-[var(--primary)] transition-all placeholder:text-[var(--on-surface)] placeholder:opacity-40 text-[var(--on-surface)] uppercase tracking-widest font-normal"
               />
               <motion.div 
                 className="absolute bottom-0 left-0 h-[1px] bg-[var(--primary)]"
@@ -112,13 +113,13 @@ function Form() {
             <motion.div className="relative">
               <input 
                 type="email"
-                placeholder="YOUR EMAIL"
+                placeholder="YOUR WORK EMAIL"
                 required
                 onFocus={() => { setFocusedField("email"); triggerHaptic('light'); }}
                 onBlur={() => setFocusedField(null)}
                 value={formData.email}
                 onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                className="w-full bg-transparent border-b border-[var(--on-surface)]/20 py-6 text-xl outline-none focus:border-[var(--primary)] transition-all placeholder:text-[var(--on-surface)] placeholder:opacity-40 text-[var(--on-surface)] uppercase tracking-widest font-normal"
+                className="w-full bg-transparent border-b border-[var(--on-surface)]/20 py-4 md:py-6 text-lg md:text-xl outline-none focus:border-[var(--primary)] transition-all placeholder:text-[var(--on-surface)] placeholder:opacity-40 text-[var(--on-surface)] uppercase tracking-widest font-normal"
               />
               <motion.div 
                 className="absolute bottom-0 left-0 h-[1px] bg-[var(--primary)]"
@@ -128,14 +129,14 @@ function Form() {
           </div>
 
           <div className="flex flex-col gap-6">
-            <p className="label-sm text-[var(--on-surface)] opacity-60 uppercase tracking-widest font-bold">Select Interests (Multi-select)</p>
+            <p className="label-sm text-[var(--on-surface)] opacity-80 uppercase tracking-widest font-black text-[10px] md:text-xs">WHAT SHOULD WE HELP YOU WITH?</p>
             <div className="flex flex-wrap gap-2 md:gap-3">
               {services.map((s) => (
                 <button
                   key={s}
                   type="button"
                   onClick={() => toggleInterest(s)}
-                  className={`px-5 py-2.5 rounded-full border text-[10px] uppercase tracking-widest transition-all font-bold ${
+                  className={`px-4 md:px-5 py-2 md:py-2.5 rounded-full border text-[9px] md:text-[10px] uppercase tracking-widest transition-all font-bold ${
                     formData.interests.includes(s)
                       ? "bg-[var(--primary)] text-white border-[var(--primary)] shadow-lg shadow-[var(--primary)]/20" 
                       : "border-[var(--on-surface)]/20 hover:border-[var(--on-surface)]/40 text-[var(--on-surface)]/60 hover:text-[var(--on-surface)] bg-[var(--on-surface)]/5"
@@ -149,14 +150,14 @@ function Form() {
 
           <motion.div className="relative mt-4">
             <textarea 
-              placeholder="BRIEF YOUR VISION"
+              placeholder="TELL US ABOUT YOUR PROJECT VISION"
               required
-              rows={4}
+              rows={3}
               onFocus={() => { setFocusedField("msg"); triggerHaptic('light'); }}
               onBlur={() => setFocusedField(null)}
               value={formData.message}
               onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-              className="w-full bg-transparent border-b border-[var(--on-surface)]/20 py-6 text-xl outline-none focus:border-[var(--primary)] transition-all placeholder:text-[var(--on-surface)] placeholder:opacity-40 text-[var(--on-surface)] uppercase tracking-widest font-normal resize-none h-[120px]"
+              className="w-full bg-transparent border-b border-[var(--on-surface)]/20 py-4 md:py-6 text-lg md:text-xl outline-none focus:border-[var(--primary)] transition-all placeholder:text-[var(--on-surface)] placeholder:opacity-40 text-[var(--on-surface)] uppercase tracking-widest font-normal resize-none h-[100px] md:h-[120px]"
             />
             <motion.div 
               className="absolute bottom-0 left-0 h-[1px] bg-[var(--primary)]"
@@ -167,7 +168,7 @@ function Form() {
           <button 
             type="submit" 
             disabled={status === "Sending..."}
-            className="btn-primary py-6 px-16 self-start text-xl group relative overflow-hidden"
+            className="btn-primary py-5 md:py-6 px-12 md:px-16 self-start text-lg md:text-xl group relative overflow-hidden mt-4"
           >
             <AnimatePresence mode="wait">
               {status === "Sending..." ? (
@@ -175,8 +176,8 @@ function Form() {
                   TRANSMITTING... <i className="ri-loader-4-line animate-spin" />
                 </motion.span>
               ) : (
-                <motion.span key="initiate" initial={{ y: 20 }} animate={{ y: 0 }} className="flex items-center gap-3 text-white">
-                  INITIATE <i className="ri-arrow-right-line group-hover:translate-x-2 transition-transform text-white" />
+                <motion.span key="initiate" initial={{ y: 20 }} animate={{ y: 0 }} className="flex items-center gap-3 text-white font-black italic">
+                  SEND ENQUIRY <i className="ri-arrow-right-line group-hover:translate-x-2 transition-transform text-white" />
                 </motion.span>
               )}
             </AnimatePresence>

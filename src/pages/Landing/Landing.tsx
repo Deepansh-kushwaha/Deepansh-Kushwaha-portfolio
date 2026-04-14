@@ -318,8 +318,8 @@ function Landing() {
                
                <div className="flex flex-col md:flex-row gap-6 justify-center items-center">
                   <Magnetic strength={0.2}>
-                    <Link to="/contact" className="btn-primary py-10 px-24 text-2xl">
-                       Start A Project
+                    <Link to="/contact" className="btn-primary py-10 px-24 text-2xl text-white">
+                       GET A CUSTOM QUOTE
                     </Link>
                   </Magnetic>
                   

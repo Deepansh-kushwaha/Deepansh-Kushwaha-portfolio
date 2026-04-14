@@ -51,12 +51,39 @@ function Contact() {
         {/* Section 1: Header */}
         <section className="snap-section min-h-[80vh] flex flex-col justify-center items-center text-center relative">
           <header className="reveal stagger-1">
-            <p className="label-md text-[var(--primary)] mb-4">Contact</p>
-            <h1 className="display-lg">GET IN <span className="text-[var(--primary)]">TOUCH</span></h1>
-            <p className="body-lg opacity-60 mt-6 max-w-2xl mx-auto italic">
-              "Design is not just what it looks like and feels like. Design is how it works." — Steve Jobs
+            <p className="label-md text-[var(--primary)] mb-4 tracking-[0.5em] uppercase">Connect</p>
+            <h1 className="display-lg leading-tight uppercase font-black italic">GET IN <span className="text-outline-primary whitespace-nowrap">TOUCH.</span></h1>
+            <p className="body-lg opacity-60 mt-8 max-w-xl mx-auto italic text-lg leading-relaxed">
+              "Every great architectural masterpiece begins with a conversation. Let’s initiate yours."
             </p>
           </header>
+
+          {/* New Call Booking Option */}
+          <motion.div 
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="mt-20 p-8 md:p-12 bg-[var(--surface-container-low)] rounded-[3rem] border border-[var(--on-surface)]/5 flex flex-col md:flex-row items-center gap-10 md:gap-20 max-w-4xl mx-auto group hover:scale-[1.02] transition-transform duration-500 shadow-2xl shadow-black/5"
+          >
+            <div className="flex-1 text-center md:text-left">
+              <p className="label-md text-[var(--primary)] mb-4 uppercase tracking-widest text-xs font-black">Direct Access</p>
+              <h3 className="headline-lg text-4xl md:text-5xl uppercase font-black leading-none mb-4">SCHEDULE <br /> <span className="italic">A CALL</span></h3>
+              <p className="body-md opacity-40 text-sm">Prefer a verbal overview? Book a 15-minute discovery call to discuss your project requirements in person.</p>
+            </div>
+            
+            <div className="shrink-0 flex flex-col items-center gap-4">
+              <a 
+                href="https://calendly.com" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                onClick={() => triggerHaptic('medium')}
+                className="btn-primary px-12 py-5 text-xl group whitespace-nowrap shadow-xl shadow-red-900/10"
+              >
+                BOOK 15 MIN <i className="ri-calendar-check-line ml-3 group-hover:rotate-12 transition-transform" />
+              </a>
+              <span className="label-sm opacity-20 text-[10px] uppercase tracking-[0.2em] font-bold italic">Available 10AM - 6PM GMT</span>
+            </div>
+          </motion.div>
 
           <motion.div 
             initial={{ opacity: 0 }}
@@ -67,9 +94,9 @@ function Contact() {
               (window as any).lenis?.scrollTo('#contact-form');
               triggerHaptic('light');
             }}
-            className="absolute bottom-0 left-1/2 -translate-x-1/2 cursor-pointer flex flex-col items-center gap-2 group"
+            className="absolute bottom-[-10px] left-1/2 -translate-x-1/2 cursor-pointer flex flex-col items-center gap-2 group"
           >
-            <span className="label-sm opacity-20 group-hover:opacity-100 transition-opacity uppercase tracking-widest text-[10px]">Scroll to message</span>
+            <span className="label-sm opacity-20 group-hover:opacity-100 transition-opacity uppercase tracking-widest text-[10px]">Or Brief us manually</span>
             <i className="ri-arrow-down-s-line text-2xl text-[var(--primary)]"></i>
           </motion.div>
         </section>
