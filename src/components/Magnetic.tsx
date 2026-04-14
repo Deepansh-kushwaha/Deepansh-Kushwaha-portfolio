@@ -1,12 +1,13 @@
 import React, { useRef } from "react";
 import { motion, useMotionValue, useSpring } from "framer-motion";
+import { triggerHaptic } from "../utils/haptics";
 
 interface MagneticProps {
   strength?: number; // how much the element moves toward the cursor
   children: React.ReactNode;
 }
 
-const Magnetic: React.FC<MagneticProps> = ({ children, strength = 0.3 }) => {
+const Magnetic: React.FC<MagneticProps> = React.memo(({ children, strength = 0.3 }) => {
   const wrapperRef = useRef<HTMLDivElement>(null);
 
   // Motion values for x & y movement
@@ -16,6 +17,10 @@ const Magnetic: React.FC<MagneticProps> = ({ children, strength = 0.3 }) => {
   // Add spring for smooth animation
   const springX = useSpring(x, { stiffness: 150, damping: 12 });
   const springY = useSpring(y, { stiffness: 150, damping: 12 });
+
+  const handleMouseEnter = () => {
+    triggerHaptic('light');
+  };
 
   const handleMouseMove = (e: React.MouseEvent) => {
     const element = wrapperRef.current;
@@ -39,12 +44,13 @@ const Magnetic: React.FC<MagneticProps> = ({ children, strength = 0.3 }) => {
       ref={wrapperRef}
       style={{ x: springX, y: springY }}
       className="inline-block cursor-pointer"
+      onMouseEnter={handleMouseEnter}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
     >
       {children}
     </motion.div>
   );
-};
+});
 
 export default Magnetic;

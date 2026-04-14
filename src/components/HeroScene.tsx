@@ -24,14 +24,16 @@ function Ripple() {
   return (
     <mesh ref={rippleRef} rotation={[-Math.PI / 2, 0, 0]} position={[0, -2, 0]}>
       <ringGeometry args={[0.98, 1, 128]} />
-      <meshBasicMaterial color="var(--primary)" transparent opacity={0.6} />
+      <meshBasicMaterial color="#b81400" transparent opacity={0.6} />
     </mesh>
   );
 }
 
+import { getIKUrl } from '../utils/imageKit';
+
 function Model({ scrollY }: { scrollY: number }) {
-  // Ultra-robust pathing for Vite
-  const modelPath = "/mecha_hunter_katana.glb";
+  // Ultra-robust pathing for Vite via ImageKit CDN
+  const modelPath = getIKUrl("/portfolio/mecha_hunter_katana.glb");
 
   const { scene } = useGLTF(modelPath);
   const modelRef = useRef<THREE.Group>(null);
@@ -107,19 +109,28 @@ function Model({ scrollY }: { scrollY: number }) {
 export default function HeroScene() {
   const [scrollY, setScrollY] = React.useState(0);
   const [hasError, setHasError] = React.useState(false);
+  const [isDesktop, setIsDesktop] = React.useState(typeof window !== 'undefined' ? window.innerWidth > 1024 : false);
 
   React.useEffect(() => {
+    const handleResize = () => {
+      setIsDesktop(window.innerWidth > 1024);
+    };
+
     const handleScroll = () => {
       const totalScroll = document.documentElement.scrollHeight - window.innerHeight;
       const progress = totalScroll <= 0 ? 0 : window.scrollY / totalScroll;
       setScrollY(progress);
     };
 
+    window.addEventListener('resize', handleResize);
     window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('resize', handleResize);
+      window.removeEventListener('scroll', handleScroll);
+    };
   }, []);
 
-  if (hasError) return null;
+  if (hasError || !isDesktop) return null;
 
   return (
     <div className="absolute inset-0 z-0 pointer-events-none bg-transparent">
@@ -128,11 +139,9 @@ export default function HeroScene() {
         camera={{ position: [0, 0, 20], fov: 75, rotation: [0.2, 0.2, 0] }}
         onError={() => setHasError(true)}
       >
-
-
         <ambientLight intensity={1.5} />
         <spotLight position={[15, 20, 15]} angle={0.3} penumbra={1} intensity={2} castShadow />
-        <pointLight position={[-10, -10, -10]} intensity={1} color="#ff0000" />
+        <pointLight position={[-10, -10, -10]} intensity={1} color="#b81400" />
         <Suspense fallback={null}>
           <Float speed={2} rotationIntensity={0.5} floatIntensity={0.5}>
             <Ripple />
@@ -146,7 +155,7 @@ export default function HeroScene() {
   );
 }
 
-useGLTF.preload("/mecha_hunter_katana.glb");
+useGLTF.preload(getIKUrl("/portfolio/mecha_hunter_katana.glb"));
 
 
 
