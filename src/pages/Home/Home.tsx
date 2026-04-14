@@ -1,194 +1,180 @@
+import { lazy, Suspense } from "react";
 import { Link } from "react-router";
 import { motion } from "framer-motion";
 
-import "./Home.css";
-import Footer from "../../components/Footer";
-import Swiperslide from "../../components/swiperslide/Swiperslide";
-import SkillsSection from "../../components/SkillsSection";
-import Magnetic from "../../components/Magnetic";
 import MouseFollower from "../../components/MouseFollower";
-import Testimonials from "../../components/Testimonials";
-import Newsletter from "../../components/Newsletter";
+import Magnetic from "../../components/Magnetic";
+
+// Lazy Components
+const Footer = lazy(() => import("../../components/Footer"));
+const Swiperslide = lazy(() => import("../../components/swiperslide/Swiperslide"));
+const SkillsSection = lazy(() => import("../../components/SkillsSection"));
+const Testimonials = lazy(() => import("../../components/Testimonials"));
+const Newsletter = lazy(() => import("../../components/Newsletter"));
 
 function Home() {
   return (
-    <>
-      <main className="bg-[var(--surface)] text-[var(--on-surface)] selection:bg-[var(--primary)] selection:text-white">
-        <section className="hero dot-grid-svg min-h-screen flex relative overflow-hidden pt-20">
-          <div className="container mx-auto px-6 md:px-24 grid grid-cols-1 lg:grid-cols-2 items-center h-full relative z-10 py-20">
-            <div className="flex flex-col justify-center h-full">
-              <div className="reveal stagger-1">
-                <p className="label-md text-[var(--primary)] mb-4">Personal Portfolio</p>
-                <h1 className="display-lg max-w-4xl text-6xl md:text-8xl">
-                  DEEPANSH <br />
-                  <span className="text-[var(--primary)] text-outline-primary">KUSHWAHA</span>
-                </h1>
-              </div>
+    <main className="bg-[var(--surface)] text-[var(--on-surface)] selection:bg-[var(--primary)] selection:text-white relative">
+      <MouseFollower />
+      
+      {/* 1. HERO SECTION - Personal Branding */}
+      <section className="min-h-screen flex flex-col justify-center pt-32 pb-20 relative overflow-hidden">
+        <div className="container-editorial grid grid-cols-1 lg:grid-cols-2 items-center gap-12 relative z-10">
+          <div className="reveal">
+            <p className="label-md text-[var(--primary)] mb-8 tracking-[0.5em] uppercase">Creative Engineer</p>
+            <h1 className="display-lg mb-12">
+              DEEPANSH <br />
+              <span className="text-outline-primary">KUSHWAHA</span>
+            </h1>
+            
+            <p className="body-lg max-w-md mb-16 opacity-60">
+              Curating digital experiences through intentional design and fluid motion. A sommelier of code and aesthetics.
+            </p>
 
-              <div className="reveal stagger-2 mt-12 md:max-w-md">
-                <p className="body-lg text-[var(--on-surface)] opacity-80 leading-relaxed">
-                  Curating digital experiences through intentional design and fluid motion. A sommelier of code and aesthetics.
-                </p>
-              </div>
-
-              <div className="reveal stagger-3 mt-16">
-                <Magnetic strength={0.1}>
-                  <Link to="/about" className="btn-primary group py-6 px-12">
-                    Hire Me <i className="ri-arrow-right-up-line inline-block transition-transform group-hover:-translate-y-1 group-hover:translate-x-1"></i>
-                  </Link>
-
-                </Magnetic>
-              </div>
-            </div>
-
-            {/* Enlarged & Beautified Spreaded Cards Section */}
-            <div className="relative h-[600px] mt-20 lg:mt-0 hidden xl:block">
-              {[
-                { 
-                  title: "Fluid Interaction", 
-                  accent: "from-blue-500/30", 
-                  glow: "shadow-blue-500/20",
-                  icon: "ri-cursor-fill", 
-                  rotate: -12, x: -80, y: 0,
-                  desc: "Choreographing sensory digital journeys through motion."
-                },
-                { 
-                  title: "High Engineering", 
-                  accent: "from-orange-500/30", 
-                  glow: "shadow-orange-500/20",
-                  icon: "ri-terminal-box-fill", 
-                  rotate: 0, x: 60, y: -60,
-                  desc: "Bespoke, scalable architectures built for tomorrow."
-                },
-                { 
-                  title: "Vivid Creative", 
-                  accent: "from-purple-500/30", 
-                  glow: "shadow-purple-500/20",
-                  icon: "ri-magic-line", 
-                  rotate: 12, x: 220, y: 40,
-                  desc: "Designing soul-led experiences for premium brands."
-                }
-              ].map((card, i) => (
-                <motion.div
-                  key={i}
-                  initial={{ opacity: 0, scale: 0.8, x: 0, y: 150, rotate: 0 }}
-                  animate={{ 
-                    opacity: 1, 
-                    scale: 1, 
-                    x: card.x, 
-                    y: card.y, 
-                    rotate: card.rotate 
-                  }}
-                  transition={{ 
-                    duration: 1.4, 
-                    delay: 0.6 + (i * 0.25), 
-                    ease: [0.22, 1, 0.36, 1] 
-                  }}
-                  whileHover={{ 
-                    y: card.y - 40, 
-                    scale: 1.08, 
-                    rotate: card.rotate * 0.3,
-                    zIndex: 100,
-                    transition: { duration: 0.4, ease: "backOut" }
-                  }}
-                  className={`absolute w-80 aspect-[0.75] glass rounded-[2.5rem] p-10 flex flex-col justify-between border border-white/20 shadow-2xl backdrop-blur-3xl bg-gradient-to-br ${card.accent} to-transparent cursor-pointer group hover:${card.glow}`}
-                >
-                  {/* Grain Layer */}
-                  <div className="absolute inset-0 opacity-[0.03] pointer-events-none mix-blend-overlay bg-[url('https://grainy-gradients.vercel.app/noise.svg')] rounded-[2.5rem]"></div>
-                  
-                  <div className="relative z-10 w-16 h-16 rounded-2xl bg-black/20 flex items-center justify-center border border-white/10 group-hover:bg-[var(--primary)] group-hover:border-transparent transition-all duration-500 shadow-inner">
-                    <i className={`${card.icon} text-3xl text-[var(--primary)] group-hover:text-white group-hover:scale-110 transition-all duration-500`}></i>
-                  </div>
-
-
-                  <div className="relative z-10">
-                    <p className="label-md opacity-40 mb-3 tracking-widest uppercase text-xs">Capability // 0{i + 1}</p>
-                    <h3 className="headline-md font-bold tracking-tight text-3xl mb-4 leading-none">{card.title}</h3>
-                    <p className="body-sm opacity-60 leading-relaxed font-light">
-                      {card.desc}
-                    </p>
-                  </div>
-
-                  {/* Highlight Shine */}
-                  <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-tr from-transparent via-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none rounded-[2.5rem]"></div>
-                </motion.div>
-              ))}
-            </div>
-
-          </div>
-
-          <MouseFollower />
-        </section>
-
-
-        <section id="features" className="bg-[var(--surface)]">
-          <SkillsSection />
-        </section>
-
-        <section id="projects" className="p-10 md:p-24 flex flex-col justify-center min-h-screen bg-[var(--surface-container-low)]">
-          <div className="reveal stagger-1 mb-16">
-            <p className="label-md text-[var(--primary)]">Curated Selection</p>
-            <h2 className="headline-lg">Selected Projects</h2>
-          </div>
-
-          <div className="reveal stagger-2">
-            <Swiperslide />
-          </div>
-
-          <div className="flex items-center justify-center mt-20 reveal stagger-3">
-            <Magnetic strength={1}>
-              <Link to="/projects" className="btn-primary">
-                View All Projects <i className="ri-arrow-right-line"></i>
+            <div className="flex items-center gap-8">
+              <Magnetic strength={0.15}>
+                <Link to="/contact" className="btn-primary">
+                  Initiate Inquiry <i className="ri-arrow-right-up-line"></i>
+                </Link>
+              </Magnetic>
+              <Link to="/catalogue" className="label-md underline underline-offset-8 opacity-40 hover:opacity-100 transition-opacity">
+                Explore Studio
               </Link>
-            </Magnetic>
-          </div>
-        </section>
-
-        <Testimonials />
-
-        <section className="min-h-screen flex flex-col justify-center items-center text-center p-10 md:p-24 relative overflow-hidden">
-          <div className="reveal stagger-1">
-            <p className="label-md text-[var(--primary)] text-center">Inquiries</p>
-            <h2 className="display-lg text-center mb-16">Let's Create<br />Something Fluid</h2>
+            </div>
           </div>
 
-          <div className="reveal stagger-2 flex flex-wrap items-center justify-center gap-8 md:gap-16 mt-10">
-            <Magnetic strength={0.5}>
-              <a href="https://www.linkedin.com/in/deepansh-kushwaha" target="_blank" rel="noreferrer"
-                className="glass soft-shadow p-8 rounded-full text-4xl hover:text-[var(--primary)] transition-colors">
-                <i className="ri-linkedin-box-line"></i>
-              </a>
-            </Magnetic>
-            <Magnetic strength={0.5}>
-              <a href="https://github.com/Deepansh-kushwaha" target="_blank" rel="noreferrer"
-                className="glass soft-shadow p-8 rounded-full text-4xl hover:text-[var(--primary)] transition-colors">
-                <i className="ri-github-line"></i>
-              </a>
-            </Magnetic>
-            <Magnetic strength={0.5}>
-              <a href="https://instagram.com/deepansh_kushwaha" target="_blank" rel="noreferrer"
-                className="glass soft-shadow p-8 rounded-full text-4xl hover:text-[var(--primary)] transition-colors">
-                <i className="ri-instagram-line"></i>
-              </a>
-            </Magnetic>
-            <Magnetic strength={0.5}>
-              <a href="mailto:deepanshkushwaha9@gmail.com"
-                className="glass soft-shadow p-8 rounded-full text-4xl hover:text-[var(--primary)] transition-colors">
-                <i className="ri-mail-line"></i>
-              </a>
-            </Magnetic>
+          {/* Spreaded Cards - Editorial Refactor */}
+          <div className="relative h-[500px] hidden xl:block perspective-[2000px]">
+            {[
+              { 
+                title: "Fluid Interaction", 
+                accent: "rgba(184, 20, 0, 0.05)", 
+                icon: "ri-cursor-fill", 
+                rotate: -8, x: -40, y: 0,
+                desc: "Choreographing sensory digital journeys through motion."
+              },
+              { 
+                title: "High Engineering", 
+                accent: "rgba(27, 28, 30, 0.03)", 
+                icon: "ri-terminal-box-fill", 
+                rotate: 0, x: 80, y: -40,
+                desc: "Bespoke, scalable architectures built for tomorrow."
+              },
+              { 
+                title: "Vivid Creative", 
+                accent: "rgba(227, 36, 10, 0.05)", 
+                icon: "ri-magic-line", 
+                rotate: 8, x: 200, y: 40,
+                desc: "Designing soul-led experiences for premium brands."
+              }
+            ].map((card, i) => (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, y: 100, rotate: 0 }}
+                animate={{ opacity: 1, x: card.x, y: card.y, rotate: card.rotate }}
+                transition={{ duration: 1.5, delay: 0.5 + (i * 0.2), ease: [0.22, 1, 0.36, 1] }}
+                whileHover={{ y: card.y - 30, scale: 1.05, rotate: card.rotate * 0.5, zIndex: 50 }}
+                className="absolute w-72 aspect-[3/4] glass rounded-[3rem] p-10 flex flex-col justify-between soft-shadow border border-[var(--on-surface)]/5 group"
+                style={{ backgroundColor: card.accent }}
+              >
+                <div className="w-14 h-14 rounded-2xl bg-[var(--surface)] flex items-center justify-center soft-shadow group-hover:bg-[var(--primary)] group-hover:text-white transition-all duration-700">
+                  <i className={`${card.icon} text-2xl text-[var(--primary)] group-hover:text-white transition-all`}></i>
+                </div>
+
+                <div>
+                  <p className="label-md opacity-20 mb-3 tracking-tighter">0{i + 1} // Expertise</p>
+                  <h3 className="display-lg text-2xl mb-4 leading-none">{card.title}</h3>
+                  <p className="body-lg text-sm opacity-50">{card.desc}</p>
+                </div>
+              </motion.div>
+            ))}
           </div>
-        </section>
-
-        <Newsletter />
-
-        <div className="mt-20 w-full relative z-10">
-          <Footer />
         </div>
-      </main>
-    </>
+        
+        {/* Background Accent */}
+        <div className="absolute bottom-0 right-0 w-[60vw] h-[60vw] bg-[var(--primary)]/5 rounded-full blur-[120px] -z-10 translate-x-1/4 translate-y-1/4" />
+      </section>
+
+      {/* 2. SKILLS - The Technical Foundation */}
+      <section className="bg-[var(--surface-container-low)] rounded-[4rem] md:rounded-[6rem] mx-4 md:mx-8">
+        <Suspense fallback={null}>
+          <SkillsSection />
+        </Suspense>
+      </section>
+
+      {/* 3. PROJECTS - The Track Record */}
+      <section className="section-padding container-editorial">
+        <div className="reveal mb-20 flex flex-col md:flex-row justify-between items-end gap-8">
+          <div>
+            <p className="label-md text-[var(--primary)] mb-6 tracking-[0.5em]">Collections</p>
+            <h2 className="display-lg text-4xl md:text-6xl">Selected <br /> Interventions</h2>
+          </div>
+          <p className="body-lg opacity-40 max-w-xs italic text-right">Curated projects that redefine the intersection of commerce and art.</p>
+        </div>
+
+        <div className="reveal stagger-1">
+          <Suspense fallback={null}>
+            <Swiperslide />
+          </Suspense>
+        </div>
+
+        <div className="flex justify-center mt-20 reveal stagger-2">
+          <Magnetic strength={0.2}>
+            <Link to="/catalogue" className="btn-primary px-16 py-8">
+              Full Catalogue <i className="ri-arrow-right-line"></i>
+            </Link>
+          </Magnetic>
+        </div>
+      </section>
+
+      {/* 4. TRUST - Identity & Global Reach */}
+      <div className="py-20 bg-[var(--surface)]">
+        <Suspense fallback={null}>
+          <Testimonials />
+        </Suspense>
+      </div>
+
+      {/* 5. CALL TO ACTION - Connecting */}
+      <section className="min-h-[80vh] flex flex-col justify-center items-center text-center px-6 relative overflow-hidden">
+        <div className="absolute inset-0 dot-grid-svg opacity-30" />
+        
+        <div className="reveal relative z-10">
+          <p className="label-md text-[var(--primary)] mb-12 tracking-[1.5em] uppercase">Connect</p>
+          <h2 className="display-lg text-[12vw] md:text-[8vw] mb-16 leading-none">Let's Create <br /> Something Fluid.</h2>
+          
+          <div className="flex flex-wrap items-center justify-center gap-6 md:gap-12 mt-12">
+            {[
+              { icon: "ri-linkedin-box-line", link: "https://www.linkedin.com/in/deepansh-kushwaha" },
+              { icon: "ri-github-line", link: "https://github.com/Deepansh-kushwaha" },
+              { icon: "ri-instagram-line", link: "https://instagram.com/deepansh_kushwaha" },
+              { icon: "ri-mail-line", link: "mailto:deepanshkushwaha9@gmail.com" }
+            ].map((social, i) => (
+              <Magnetic key={i} strength={0.3}>
+                <a 
+                  href={social.link} 
+                  target="_blank" 
+                  rel="noreferrer"
+                  className="w-20 h-20 md:w-24 md:h-24 rounded-full glass flex items-center justify-center text-3xl hover:bg-[var(--primary)] hover:text-white transition-all duration-700 soft-shadow border border-[var(--on-surface)]/5"
+                >
+                  <i className={social.icon}></i>
+                </a>
+              </Magnetic>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <Suspense fallback={null}>
+        <Newsletter />
+      </Suspense>
+      
+      <div className="mt-20">
+        <Suspense fallback={null}>
+          <Footer />
+        </Suspense>
+      </div>
+    </main>
   );
 }
 
 export default Home;
-

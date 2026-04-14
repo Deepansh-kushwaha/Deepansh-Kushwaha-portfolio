@@ -1,6 +1,6 @@
 import AboutSection from "../components/AboutSection";
 import Stats from "../components/Stats";
-import me from '../assets/me.jpg';
+import { getIKUrl } from "../utils/imageKit";
 
 export default function About() {
   return (
@@ -19,7 +19,7 @@ export default function About() {
           "Vite",
         ]}
         resumeUrl="https://drive.google.com/file/d/1aWxmFfQ49iL5jwyDcuSLdCxArps6Kei5/view?usp=drive_link"
-        avatarUrl={me}
+        avatarUrl={getIKUrl("me.jpg", { width: 600, quality: 90 })}
         socials={[
           { label: "GitHub", href: "https://github.com/deepansh-kushwaha" },
           { label: "LinkedIn", href: "https://linkedin.com/in/deepansh-kushwaha" },

@@ -7,12 +7,24 @@ const faqs = [
     a: "Depending on complexity, a bespoke premium experience usually takes 4-8 weeks from discovery to launch."
   },
   {
+    q: "How do you approach Meta Ads ROI?",
+    a: "We use a data-first attribution model, focusing on iterative creative testing and audience scaling. Our baseline objective is always a sustainable ROAS that outpaces your customer acquisition costs."
+  },
+  {
+    q: "What is included in Social Media Management?",
+    a: "Our full-service management includes content strategy, high-fidelity asset creation (photo/video), community management, and in-depth monthly performance audits to track growth and sentiment."
+  },
+  {
     q: "What tech stack do you specialize in?",
     a: "I work primarily with React, TypeScript, and Three.js for frontend fluidity, and Node.js for scalable backend architectures."
   },
   {
+    q: "Can you manage or audit existing ad accounts?",
+    a: "Absolutely. We begin every partnership with a comprehensive audit of your historical data to identify leaks in your funnel and immediate scaling opportunities before taking over management."
+  },
+  {
     q: "Do you offer post-launch support?",
-    a: "Absolutely. I provide ongoing maintenance and performance optimizations to ensure your digital experience remains state-of-the-art."
+    a: "Absolutely. I provide ongoing maintenance, ad optimization, and performance scaling to ensure your digital presence remains at peak efficiency."
   }
 ];
 
